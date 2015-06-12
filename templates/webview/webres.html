@@ -1,0 +1,141 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+<style>
+
+#mainTable {
+	width:100%;
+	
+
+}
+
+#mainTable  tr {
+	border:solid green;
+	
+}
+
+
+
+#mainTable  th {
+	
+	padding:.3em;
+	
+}
+#mainTable  td {
+	border-top:1px solid black;
+	padding:.3em;
+	
+}
+
+
+
+
+</style>
+{% endblock %}
+
+
+
+{% block mainbox  %}
+		<form id="mainForm" method='POST'>
+			
+			{% csrf_token %}
+	
+	{% if rsvnentry == "on" %}
+
+		<div style="text-align:center">
+
+			<table align=center>
+				{{ rsvnForm.as_table }}
+			</table>
+			
+			<button class="button-like" name='saveRsvn'>Make Reservation</button>
+		</div>
+	{% else %}
+
+		<div>		
+			<table id="mainTable">
+			<tr>	
+				<th>First Name</th>
+				<th>Last Name</th>
+			
+				<th>Tel</th>
+			
+				<th>E Mail</th>
+			
+				<th>Date In</th>
+				<th>Date Out</th>
+			
+				<th>Rooms</th>
+				<th>Type</th>
+				<th>Beds</th>
+				
+				<th>A/C/I</th>
+			
+				<th>City</th>
+				<th>Country</th>
+				<th>Inquiry </th>
+				<th>Action</th>
+				<th>Reserved</th>
+				<th>Process</th>
+			</tr>		
+					
+					
+			{% for WR in wrsvnList|dictsortreversed:"id" %}
+			<tr>
+				<td>{{ WR.firstname }}</td>
+				<td>{{ WR.lastname }}</td>
+				<td>{{ WR.phone1 }}</td>
+			
+				<td>{{ WR.email }}</td>
+			
+				<td>{{ WR.dateIn|date:"m/d/y" }}</td>
+				<td>{{ WR.dateOut|date:"m/d/y" }}</td>
+			
+				<td>{{ WR.rooms }}</td>
+				<td>{{ WR.type }}</td>
+				<td>{{ WR.beds }}</td>
+				
+				<td>{{ WR.adult }}/
+				{{ WR.child }}/
+				{{ WR.infant }}</td>
+			
+				<td>{{ WR.city }}</td>
+				<td>{{ WR.country }}</td>
+				<td>{{ WR.inquiry }}</td>
+				
+				<td>
+					{% if WR.rsvn > 0 %}
+						SAVED
+					{% else %}
+					<button name="deleteRecord" value="{{WR.id}}">DELETE</button>
+					{% endif %}
+				
+				</td>
+				
+				<td>{% if WR.rsvn > 0 %}
+					YES	{% else %}	NO	{% endif %}
+				</td>
+				
+				<td>
+					{% if WR.rsvn > 0 %}
+						Process
+					{% else %}
+						<a href="{% url 'webmake' WR.id %}" name="process" >Process</a>	
+					{% endif %}
+				</td>	
+			</tr>
+			{% endfor %}
+				
+			</table>
+		</div>
+	{% endif %}
+		</form>
+
+	<script >
+		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+		
+	</script>
+
+{% endblock %}
+
+	

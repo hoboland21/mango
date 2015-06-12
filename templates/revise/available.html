@@ -1,0 +1,91 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+
+<style>
+
+.global {
+	border:1px solid #898989;
+	margin:auto;
+
+}
+
+.global td {
+	padding : 10px;
+	margin:0;
+	text-align:center;
+	font-size:12pt;
+	color:black;
+	background-color:white;
+
+}
+
+.gridBox  {
+	width:100%;
+	overflow-x:auto;
+}
+
+.titleBox {
+	text-align:center;
+	padding:.5em;
+}
+
+.title {
+	color:maroon;
+	font-weight:800;
+	font-size:18pt;
+	
+}
+
+.x_label_class {
+	padding : 10px;
+	font-size:12pt;
+	text-align:center;
+	background-color:yellow;
+	
+}
+
+.y_label_class {
+
+	padding : 10px;
+	font-size:12pt;
+	text-align:right;
+	background-color:beige;																																					
+}
+
+
+
+</style>
+
+{% endblock %}
+
+{% block mainbox  %}
+
+<form   method='POST'>
+	{% csrf_token %}
+<div>
+	{% include 'revise/dateSelect.html' %}
+
+</div>
+
+<div class="std_div2">
+<div class="titleBox">
+	<span class="title">{{ tableTitle }}</span>
+</div>
+	<div class="gridBox">
+		{%  if gridHTML %}
+		<table class="global" >
+			{% autoescape off %} {{ gridHTML }} {% endautoescape %}
+		</table>
+		{% endif %}
+	</div>
+</div>
+
+
+</form>
+<script>
+        $( "#availableMenu").css("background-color","navajowhite")
+</script>
+
+{% endblock %}
+

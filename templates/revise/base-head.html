@@ -1,0 +1,159 @@
+<style>
+
+#top_line  {
+    background-color:black;
+    color:yellow;
+    text-align:right;
+    padding:3px;
+ }
+
+#top_line ul
+    {
+    padding-right:4em;
+    list-style-type:none;
+    display:inline;
+    width:80%;
+    font-size:10pt;
+    color:white;
+    margin:auto;
+}
+
+#top_line li {
+    background-color:RoyalBlue;
+    color:yellow;
+    display:inline;
+    margin-right:2em;
+}
+
+#top_line li a {
+    color:white;
+    background-color:brown;
+    padding:3px;
+
+}
+
+#top_line li a:hover {
+    color:black;
+    background-color:white;
+
+}
+#mainmenu  {
+	font-size:12pt;
+	width:85%;
+	margin:auto;
+
+}
+
+
+#mainmenu td {
+	text-align:center;
+	padding: 2px;
+	border-radius:8px;
+	
+}
+#mainmenu td:hover {
+
+	background-color:beige;
+
+}
+#mainmenu a {
+	color:black;
+}
+
+
+#mainmenu a:hover {
+
+	color:red;
+
+}
+
+
+
+</style>
+
+<div id="top_line">
+	<div style="float:left; width:400px; text-align:center; font-size:10pt; font-weight:bold; padding:4px;color:white;">
+		<span id="date_time"></span></div>
+        <script type="text/javascript">window.onload = date_time('date_time');</script>
+<!-- Insert clock -->
+		<ul >
+			{% if webCount > 0 %}
+				<li>Online Inquiry: {{ webCount }}</li>
+			{% endif %}
+			
+			<li>User:<h3 style="display:inline"> {{ user.username }}</h3></li>
+		    <li><a href="/accounts/logout">Logout</a></li>
+		    <li><a href="/accounts/password_change">Change Password</a></li>
+		</ul>
+	</div>
+
+	<div style="border:1px solid black; background-color:white">
+		<table id="mainmenu">
+			<tr>
+			{% if rsvnid %}
+				<td id="rsvnMenu"><a href="{% url 'rsvnlist' rsvnid  %}">Reservations</a></td>
+				<td id="gridMenu"><a href="{% url 'grid' rsvnid %}">Grid</a></td>
+				<td id="calendarMenu"><a href="{% url 'calendar' rsvnid  %}">Calendar</a></td>
+			{% else %}
+				<td id="rsvnMenu"><a href="{% url 'rsvnlist' 0  %}">Reservations</a></td>
+				<td id="gridMenu"><a href="{% url 'grid' 0 %}">Grid</a></td>
+				<td id="calendarMenu"><a href="{% url 'calendar' 0  %}">Calendar</a></td>
+			
+			{%endif %}
+				<td id="eventMenu"><a href="{% url 'events'  %}">Events</a></td>
+				<td id="currentMenu"><a href="{% url 'current'  %}">Current Information</a></td>
+				<td id="availableMenu"><a href="{% url 'available'  %}">Availability</a></td>
+				<td id="serviceMenu"><a href="{% url 'service'  %}">Services</a></td>
+
+<!--				<td id="chatMenu"><a href="{% url 'chat'  %}">CHAT</a></td>  -->
+<!--				<td id="logMenu"><a href="{% url 'log'  %}">Electronic Log Book</a></td> -->
+
+
+<!--
+				<td id="tableMenu">
+					<select id="tableSelect">
+						<option>Tables</option>
+						<option value="/rsvn/service">Services</option>
+						<option value="/rsvn/occupancy">Occupancy </option>
+						<option value="/rsvn/available">Available</option>
+					</select>
+				</td>
+-->
+			
+			{% if perms.rsvn.delete_rsvn %}
+				<td id="adminMenu">
+					<select id="adminSelect">
+					<option value="/rsvn/admin">Admin</option>
+					<option value="/rsvn/webres">Web Reservations</option>
+					<option value="/rsvn/occupancy">Occupancy </option>
+					<option value="/rsvn/rates">Rates</option>
+					<option value="/rsvn/agents">Agent Editor</option>
+					
+					</select>
+				</td>
+			{% endif %}
+			</tr>
+		</table>
+	</div>	
+</div>			
+
+<script>
+$("#adminSelect").change ( 
+	function() {
+		var url = $( '#adminSelect' ).val();
+		window.location.assign(url);
+	}
+);
+$("#tableSelect").change ( 
+	function() {
+		var turl = $( '#tableSelect' ).val();
+		window.location.assign(turl);
+	}
+);
+</script>
+
+
+
+
+
+

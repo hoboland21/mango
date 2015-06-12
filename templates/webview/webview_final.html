@@ -1,0 +1,73 @@
+{% extends "webview/base.html" %}
+
+{% block mainblock %}
+
+	<style>
+		h1 {
+			font-size:16pt;
+			margin:5px;
+		}
+
+		input {
+			border:none;
+		}
+
+		.leftFrame {
+			width:520px;
+			padding:1em;
+			float:left;
+		}
+
+		.rightFrame {
+			width:270px;
+			padding:1em;
+			float:left;
+		}
+
+		.formTable td,
+		.formTable th,
+		.formTable input  {
+			font-size:12pt;
+		}
+
+		.formTable th { 
+			font-size:12pt;
+			padding-right:10px;
+			text-align: right;
+		}
+		.h1 {
+			font-weight:bold;
+			font-size:14pt;
+		}
+		
+	</style>
+		
+	
+	<form id="mainForm" method='POST'>
+		<div style="text-align:center" class="h1"> Please Retain for Your Records</div>
+		<div style="text-align:center"> Inquiry Number : <span style="font-size=16pt;font-weight:bold;">{{ webRsvn.inquiry }}</span></div>
+
+		<div class="leftFrame" >
+			<table class="formTable" style="margin:auto">{{ webRsvnForm.as_table }}</table>
+		
+
+		</div>
+		
+		<div class="rightFrame">
+			<div>
+				Your Inquiry has been submitted. 
+				You will be contacted by a Resort representative within 24 hours.
+				We respect your privacy, all information and correspondence are confidential.
+				You will receive notification by e-mail at {{ webRsvn.email }}
+			</div>
+			<div>
+				We are very grateful you choose to stay with us and we will go out of our way to make your stay a pleasent one
+				
+			</div>
+		</div>
+		<div class="clear"></div>
+
+	</form>
+{% endblock %}
+
+		

@@ -1,0 +1,129 @@
+<!-- We need to bring in packed rsvnRec -->
+
+<style>
+	.cellBlock{
+		overflow-y:auto;
+		float:left;
+		font-family:OpenRegular;
+		border-right:4px solid rgba(23,113,0,.2);
+		padding:.5em;
+		height:150px;
+
+	}
+
+	.cellBlock div {
+		margin-bottom:2px;
+	}
+	.cellBlock span {
+		opacity:0.5;
+		margin-right:5px;
+		font-family:smallCaps;
+
+	}
+
+
+</style>
+<div style="padding:1em;background-color:#808080;"> 
+	<div style="padding:.5em; border:3px solid green; border-radius:20px;background-color:white;">
+	{% if rsvnid > 0 %}
+		
+
+		<!-- Cell Column 1-->
+		<div  class="cellBlock" style="float:left;width:400px">
+			<div style="padding:4px">
+				{% if rsvnRec.tourset %}	
+					<a href="{% url 'rsvnupdate' rsvnid %}" style="color:royalblue">{{rsvnRec.tourset.agent.agency }}</a><br>
+				{% endif %}
+				<a href=  "{% url 'rsvnupdate' rsvnid %}" style="color:{{ rsvnRec.textColor }}">{{rsvnRec.firstname }} {{ rsvnRec.lastname }}</a>
+			</div>
+			<div >{{rsvnRec.dateIn|date:"D m/d/y" }} - {{ rsvnRec.dateOut|date:"D m/d/y" }}</div>
+	
+			<div>
+			<span>Adult :</span>{{rsvnRec.adult }}			
+				<span>Child :</span>{{rsvnRec.child }}
+				<span>Infant :</span>{{rsvnRec.infant }}
+			</div>
+			<div>
+			<span>Arrival Flight:</span>
+				{{ rsvnRec.tourset.arrive_flight }} - {{ rsvnRec.tourset.arrive_time|date:"m/d/y-h:m:s" }}<br>
+			<span>Departure Flight:</span>
+				{{  rsvnRec.tourset.depart_flight }} - {{ rsvnRec.tourset.depart_time|date:"m/d/y-h:m:s" }}
+			</div>
+
+		</div>
+			
+		<!-- Cell Column 2-->
+		<div class="cellBlock" style="width:200px">
+			<div>{{ rsvnRec.confirm }} </div>	
+			<div><span>Status:</span>{{ rsvnRec.status|capfirst }}</div>
+			<div><span>Phone :</span>{{ rsvnRec.phone1 }}</div>
+			<div><span>Source :</span>{{ rsvnRec.source|capfirst }}</div>
+			<div><span>Type :</span>{{ rsvnRec.type|capfirst }}</div>
+			<div><span>No Rooms  :</span>{{ rsvnRec.rooms }}</div>
+			
+		</div>
+
+
+
+		<!-- Cell Column 3-->
+
+
+		<div class="cellBlock" style="width:200px; ">
+			<div style="font-weight:500; width:80px; float:left;"><span>Room{{ rsvnRec.rooms|pluralize}}:</span></div> 
+			{% for rms in rsvnRec.roomset|dictsort:'roominfo.number'  %}
+				<div style="font-weight:500; width:42px; float:left;">{{ rms.roominfo.number }}</div> 	
+			{% endfor %}
+			<div class="clear"></div>
+		</div>
+
+		<!-- Cell Column 5-->
+
+		<div  class="cellBlock"  style="width:200px">
+			<div style="text-align:center"><span>Services:</span></div>
+			<div>
+			
+				{% for sl in rsvnRec.serviceList %}
+					<span style="margin-left:1px; opacity:0.9; font-weight:600; font-size:12pt; color:royalblue">{{ sl }}</span><br>
+
+				{% endfor%}
+				</ul>
+
+			</div>
+		</div>	
+
+
+		<!-- Cell Column 6-->
+
+		<div  class="cellBlock"  style="width:300px">
+			<div style="text-align:center"><span>Notes:</span></div>
+			<div>{{ rsvnRec.notes}}</div>
+		</div>	
+		
+		<!-- Cell Column 7-->
+
+		<div  class="cellBlock"  style="width:300px">
+
+			<div style="text-align:center"><span>Blog : </span></div>
+			{% for line in rsvnRec.blogset %}
+			<div>
+				<div class="blogHead" style="background-color:#bababa"><span style="font-size:9pt">{{ line.time }} {{ line.clerk }}</span>  </div>
+				<div class="blogItem" style="font-weight:normal; font-size:10pt"> {{ line.desc }}</div>
+			</div>	
+			{% endfor %}
+		</div>	
+
+		<div class="clear"></div>
+
+
+	
+{% else %}
+
+	<div style=" height:100%; text-align:center; padding:20px" >
+	
+		<span style="font-size:22pt; font-weight:bold; color:darkgreen; margin-top:20px;">Mango Resort Reservation System</span>
+
+	</div>
+{% endif %}
+	<div class="clear"></div>
+	</div>
+</div>

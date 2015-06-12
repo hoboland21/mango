@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mango Resort Reservation System</title>
+    <link rel="stylesheet" type="text/css" href="/static/global/js/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/rsvn/css/rsvn-style.css">
+    <link rel="stylesheet" type="text/css" href="/static/global/js/jquery-ui.css">
+    <script src="/static/global/js/external/jquery/jquery.js"></script>
+    <script src="/static/global/js/jquery-ui.min.js"></script>
+
+<style>
+
+
+
+    body {
+
+        background-color : white;
+        font-size:10pt;
+        font-family:Tahoma, Verdana, Trebuchet MS, sans-serif;
+        font-size: 1em;
+        padding:0;
+        margin:0;
+    }
+
+
+	#loginScreen {
+		background-color:SeaGreen;
+		text-align:center;
+		width:350px;
+		padding:1em;
+		border :6px double yellow;
+		border-radius: 10px;
+		box-shadow:10px 10px 5px #888888;
+		margin:auto;
+	}
+
+	#loginScreen table {
+		margin:auto;
+
+	}
+
+	#loginScreen table td {
+		margin:auto;
+		padding:.6em;
+
+	}
+	.label {
+		color:#434343;
+	}
+	.submitButton {
+		width:150px;
+		height:30px;
+		font-size:12pt;
+		border:3px double ;
+		background-color: inherit;
+		border-radius:5px;
+		text-align:center;
+		color:#202020;
+
+	}
+	h3 {
+		font-size:18pt;
+		color:black;
+	}
+
+</style>
+
+<img src="/static/rsvn/img/mangoSmall.jpg" width="300px">
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<div id="loginScreen">
+
+	<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+	{% csrf_token %}
+	<h3>Mango Resort Reservation System</h3>
+	<table>
+	<tr>
+		<td class="label">{{ form.username.label_tag }}</td>
+		<td>{{ form.username }}</td>
+	</tr>
+	<tr>
+		<td class="label">{{ form.password.label_tag }}</td>
+		<td>{{ form.password }}</td>
+	</tr>
+	<tr>
+		<td colspan="2"><input class="submitButton" type="submit" value="login" />
+		</td>
+	</tr>
+	</table>
+	<input type="hidden" name="next" value="{{ next }}" />
+
+	</form>
+</div>
+<script>
+$('input').attr('autocomplete','off');
+</script>

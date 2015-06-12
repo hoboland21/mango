@@ -1,0 +1,145 @@
+<style>
+	
+	.bookLeft {
+		float:left;
+		width:410px;
+		padding:1em;
+	}
+
+	.bookRight {
+		float:left;
+		width:410px;
+		padding:1em;
+	}
+	.bookInfo {
+		margin:auto;
+	}
+	
+	.bookInfo tr {
+		border:solid green;
+	}
+	
+	.bookInfo td {
+		padding:.25em;
+	}
+	
+	.bookInfo th {
+		padding:.25em;
+		text-align:right;
+	}
+
+	.bookInfo input {
+		padding:.30em;
+		border:1px solid green;
+	}
+	
+	.bookButton {
+		padding:1.5em;
+		background-color:{{ theme_accent }};
+		color: yellow;
+		border: 1px solid maroon;
+		font-size:11pt;
+		font-family:OpenSansBold;
+		border-radius:20px;
+		cursor:pointer;
+	}
+
+	.h4 {
+		display:inline;
+		text-align:left;
+		margin:0;
+		font-weight:bold;
+	}
+	#infoCell p {
+		text-align:left;
+	}
+	#infoCell span {
+		margin-left:4px;
+		
+	}
+</style>
+
+
+
+{% if next == 0 %}
+
+
+	<div style="padding:2em; text-align:center; border:1px solid green; background-color:beige; ">
+		{% if continue == 1 %}
+		<table width=100%>
+			<tr>
+				<td width="60%" id="infoCell"> 
+					<p>You have selected <span class="h4">{{ info.numRooms }} {{ info.typeChoice }} Room{{ info.numRooms|pluralize}}</span> for <span class="h4">{{ info.numDays}} Night{{ info.numDays|pluralize }}</span>.</p>
+					<p>Check-in on <span class="h4">{{ info.dateFrom }}</span> till Check-out on <span class="h4">{{ info.dateTo}}</span>.</p>
+					<p>The room charge is<span class="h4">{{ info.total }}</span></p>
+					
+					
+				</td>
+				
+				<td><button class="button-like" name="next" value='1'  >Finish Inquiry</button></td>	
+			</tr>
+			
+		</table>		
+			
+
+		{% else %}
+			 {{ info.numRooms }} Room{{ info.numRooms|pluralize }}  Unavailable
+		{% endif %}
+	</div>
+{% else %}
+	<div id="bookIt">
+		<div class="bookLeft">
+			<div class= "accentHeading">
+				Required Information
+			</div>
+			<div>
+				<table class="bookInfo" >
+					{% for rform in webRsvnForm %}
+					<tr>
+						<th
+						{% if rform.errors %}
+							class='error'
+						{% endif %}	
+						>{{ rform.label }}</th>
+						<td>{{ rform }}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+<!--    Right Half Column  -->
+		<div class="bookRight">
+			
+			<style>
+				.infoTable {
+					padding:.5em;
+				}
+				
+				.infoTable td {
+					padding:.5em;
+				}
+				.infoTable th {
+					text-align: right;
+				}
+				.infoTable tr {
+					border : solid green;
+				}
+			
+				
+			</style>
+	
+	
+			<div style="width:80%;text-align:center; " >	
+				
+				<div style="text-align:left; margin-top:5em;">Please fill out the Required Information and Click Send Inquiry   </div>
+								
+				<div><button name="bookRoom" id="bookRoom" value="on" class="button-like">Send Inquiry</button></div>				
+			</div>
+		</div>
+	</div>
+
+
+{% endif %} 	
+
+
+

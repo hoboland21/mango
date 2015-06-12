@@ -1,0 +1,401 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+
+
+<style>
+	.calTable {
+		width:100%;
+		border-collapse:collapse;
+		background-color:#BBBBBB;
+	
+	}
+
+	.calTable td
+	 {
+		border:0;
+	
+	}
+
+	.cellTable
+	{
+	margin:.3em;
+	width:85%;
+	}
+	
+	.cellTable td,
+	.cellTable th
+	{
+	}
+
+  
+
+
+</style>
+{% endblock %}
+
+{% block mainbox  %}
+<form method="POST" id="calForm">
+	
+{% csrf_token %}
+
+
+	<div> {% include  'revise/detailHeaderNew.html' %} </div>
+		
+	<div style="background-color:white; border-top:1px solid black; border-bottom:1px solid black;">	
+
+			<label  class="clean-label" for="srchdate">Date Select</label>
+			<input  class="clean-button datepicker" name='dateSelect' id="srchdate" type='text' 		
+											value="{{ dateSelect }}"class='datepicker' >
+			<button class="clean-button" name="dateMinus" > << </button>			
+			<button class="clean-button" name="datePlus" > >> </button>			
+			<button class="clean-button" name="listGo" > Go </button>
+		
+			<span style=" font-size:20pt;margin-left:40px; color:maroon"> {{ caldate|date:"l F d, Y" }} </span>
+			<span style=" font-size:16pt;text-align:center; color:#949494; margin-left:40px;"> {{ dday }} </span>
+	</div>
+	
+	<script>
+		$("#srchdate").change(
+			function() {
+				$("#calForm").submit()
+			}
+		)
+		
+		
+	</script>
+
+<style type="text/css">
+	
+.bigCell {
+
+
+    border: 3px solid rgba(50,50,100, .2);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+
+	border-bottom-right-radius:20px; 
+	/* border-bottom-left-radius:20px; */
+	margin-bottom:1em;
+	background-color: #EEEEEE;
+
+}
+
+.bigCellHead {
+	font-weight:bold;
+	font-family: smallCaps;
+
+	padding:2px;
+}
+
+.bigCellWrap {
+	padding:.3em;
+}
+
+.bigCellStripe {
+	height:10px;
+
+
+}
+
+.cell_head {
+	float:left;
+	font-family:smallCaps;
+}
+
+
+#main_cell {
+	background-color: beige;
+	padding:1em;
+}
+
+h3 {
+	font-size:10pt;
+}
+
+.ui-accordion {
+	font-size:10pt;
+
+}
+
+.ui-accordion-header {
+	font-size:12pt;
+}
+
+
+.ui-accordion-content {
+
+}
+
+
+.capLabels {
+
+	font-family: smallCaps;
+	font-size:10pt;
+}
+
+.smallCaps {
+	font-family:smallCaps;
+	font-weight:bold;
+
+}
+.sdiv {
+	float:left;
+
+	padding:5px;
+
+	width:200px;
+
+}
+.sdivCell {
+	width:30px;
+	padding:5px;
+	float:left;
+}
+
+
+
+</style>
+<!--   In House Cell 	 -->
+
+<div  id="main_cell" style= "font-size:12pt; background-color:#808080 ">	
+	
+	<div class='bigCell'> 
+		<div class='bigCellStripe'style="background-color:rgba(119,63,7,.5)" > </div>
+		
+		<div class="bigCellHead"> 
+<!-- Statistics table -->
+			<table>
+
+				<tr>
+				<td  style="width:200px">In House Rooms </td>
+				{% for stat in in_house_statlist %}
+					<td style="padding:10px 20px;font-family:smallCaps; font-size:12pt" > {{ stat.item }}-{{ stat.value }} </td> 
+				{% endfor %}
+					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" > Pax - {{ in_house_pax }} </td> 
+				</tr>
+			</table>
+<!-- @ Statistics table -->			
+		</div>
+
+		<div style="padding:.5em; margin:10px;" >
+		{% for cal in calHouse|dictsort:'roominfo.number' %}
+			<div style="width:70px; float:left;padding:.2em; color:black; font-weight:500">
+				<a style= "color:black;" href="/rsvn/calendar/{{ cal.rsvn.id}}" >{{ cal.roominfo.number}}</a></div> 
+		{% endfor %}	
+			<div class="clear">	</div>
+
+		</div>	
+	</div>	
+
+<!--   Services  Cell 	 -->
+
+
+	<div class='bigCell'> 
+		<div class='bigCellStripe'style="background-color:rgba(230,152,47,.5)" > </div>
+		<div style="padding:10px">
+	<!-- Heading -->
+			<div class='sdiv smallCaps' > Breakfast Count</div> 
+			<div class='sdiv smallCaps' > Daily Service</div> 
+			<div class='sdiv smallCaps' > Weekly Service</div> 
+			<div class='sdiv smallCaps' > Monthly Service</div> 
+			<div class='sdiv smallCaps' > From Airport</div> 
+			<div class='sdiv smallCaps' > To Airport</div> 
+			<div class='clear' ></div>
+
+	<!--  Breakfasts  -->
+			<div class='sdiv'>
+			
+				{% if  breakCount.total_adult > 0 or  breakCount.total_child  > 0 %}
+					{% if  breakCount.total_adult  > 0 %}
+						{{ breakCount.total_adult }} Adult
+					{% endif %}	
+
+					{% if  breakCount.total_child  > 0 %}
+						{{ breakCount.total_child }} Child
+					{% endif %}	
+				{% endif %}
+
+			</div>
+				
+
+	<!--  Daily Lists  -->
+			<div class='sdiv'>
+				{% for s in dailyList%}
+					{% for l in s.roomset %}
+						<a href="{% url 'calendar' s.rsvn.id %}" >{{ l.roominfo.number }}</a>,
+					{% endfor %}
+				{% endfor %}	
+			</div>
+
+	<!--  7 Day Lists  -->
+			<div class='sdiv'>
+				{% for s in rsvn7 %}
+					{% for l in s.roomset %}
+						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>
+					{% endfor %}
+				{% endfor %}	
+			</div>
+	<!--  30 Day  -->
+			<div class='sdiv'>
+				{% for s in rsvn30 %}
+					{% for l in s.roomset %}
+						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>,
+
+					{% endfor %}
+				{% endfor %}	
+			</div>
+
+	<!--  From Airport  -->
+
+
+			<div class='sdiv'>
+				{% for s in fromAirport%}
+					{% for l in s.roomset %}
+					<div class="sdivCell" ><a href="{% url 'calendar' s.rsvn.id %}" >{{ l.roominfo.number }}</a>,</div>
+					{% endfor %}
+				{% endfor %}	
+			</div>
+
+	<!--  To Airport  -->
+			<div class='sdiv'>
+				{% for s in toAirport%}
+					{% for l in s.roomset %}
+						<a href="{% url 'calendar' s.rsvn.id %}" >{{ l.roominfo.number }}</a>,
+					{% endfor %}
+				{% endfor %}	
+			</div>
+
+
+			<div class='clear' ></div>
+		</div>
+	</div>
+
+
+
+<!--   Event  	 -->
+
+	<div class='bigCell'> 
+		<div class='bigCellStripe'style="background-color:rgba(16,52,203,.5)" > </div>
+
+
+
+		<div class='bigCellHead'>
+			<table>
+				<tr>
+				<td  style="width:200px"><span>Events</span> </td>
+				{% for stat in event_statlist %}
+					<td style="padding:10px 20px;font-family:smallCaps; font-size:12pt" > {{ stat.item }}-{{ stat.value }} </td> 
+				{% endfor %}
+				</tr>
+			</table>
+		</div>	
+
+		<div class='bigCellWrap'>
+
+		{% for event in  eventList %}
+			<table class="cellTable"  width="100%">
+				<tr>
+					<td width="200px"><a href="/rsvn/calendar/{{ event.rsvn.id}}" >{{ event.title }}</a></td>
+					<td width="180px"><span class="capLabels">Start:</span>{{ event.dateStart }}</td>
+					<td width="180px"><span class="capLabels">End:</span> {{ event.dateEnd }}</td>
+					<td width="180px"><span class="capLabels">Pax:</span> {{ event.pax }}</td>
+					<td><span class="capLabels">Descr:</span> {{ cal.descr }}</td>
+				</tr> 
+			</table>
+		{% endfor %}	
+		</div>
+	</div>		
+
+
+	<!--   Checkin In Cell 	 -->
+	<div class='bigCell'> 
+		<div class='bigCellStripe' style="background-color:rgba(34,139,34,.5)" > </div>
+		<div class='bigCellHead' >
+		<!-- Statistics table -->
+			<table>
+
+				<tr>
+				<td style="width:200px">Check Ins</td>
+				{% for stat in in_statlist %}
+					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" class= " {{ stat.class }}"> {{ stat.item }}-{{ stat.value }} </td> 
+				{% endfor %}
+				{% if in_statlist %}
+					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" > Pax-{{ check_in_pax }} </td> 
+				{% endif %}
+
+
+				</tr>
+			</table>
+		</div>	
+		
+		<!-- @ Statistics table -->			
+		<div class='bigCellWrap'>
+			<!-- Check IN Records -->		
+			<div>
+				{% if check_in %}
+					{% include  'revise/calendar_cell_heading.html' %}
+				{% endif %}
+				{% for rv in check_in %}
+					{% include  'revise/calendar_cell.html' %}
+				{% endfor %}
+			</div>
+		</div>	
+
+	</div>
+
+	<!--   Checkout Cells 	 -->
+
+	<div class='bigCell'> 
+		<div class='bigCellStripe' style="background-color:rgba(205,1,33,.5)" > </div>
+		<div class='bigCellHead'>
+
+<!-- Statistics table -->
+			<table >
+				<tr>
+					<td style="width:200px">Check Outs</td>
+					{% for stat in out_statlist %}
+						<td style="padding:10px 20px;font-family:smallCaps;font-size:11pt" class="{{ stat.class }}"> {{ stat.item }}-{{ stat.value }} </td> 
+					{% endfor %}
+				{% if out_statlist %}
+					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" > Pax - {{ check_out_pax }} </td> 
+				{% endif %}
+				</tr>
+			</table>
+<!-- @ Statistics table -->			
+		</div>
+		<div class='bigCellWrap'>
+			<div>
+				
+			{% if check_out %}
+				{% include  'revise/calendar_cell_heading.html' %}
+			{% endif %}	
+
+				{% for rv in check_out %}
+					{% include  'revise/calendar_cell.html' %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+</form>
+
+ <script>
+  $(function() {
+    $( ".accordion" ).accordion();
+  });
+  </script>
+<script>
+
+
+    $( "#calendarMenu").css("background-color","navajowhite")
+
+</script>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,152 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+
+<style>
+	#controlPanel {
+		width:200px;
+		margin:auto;
+		padding:0;	
+	}
+	#controlPanel li {
+		text-align:center;
+	}
+	
+	
+
+	#statusGrid  {
+		margin:20px auto;
+		font-size:12pt;
+		border:1px solid green;
+
+	}
+	#statusGrid  td {
+		padding:3px;
+	}
+	#statusGrid  th {
+		padding:3px;
+		text-align:left;
+	}
+	
+	
+	#statusGrid  button {
+		padding:3px;
+		width:40px;
+		height:40px;
+	}
+
+	.legend {
+		list-style-type: none;
+		margin-bottom:20px;
+		padding:0;
+	}
+	
+	.legend li{
+		display:inline;
+		list-style-type: none;
+		margin:0;
+		padding:6px;
+		margin-left: .5em; 
+		width: 100px;
+		border:1px solid black;
+		
+	}
+	
+	.legend div {
+		width:20px;
+		height:20px;
+		border:1px solid green;
+		
+	}
+	
+
+
+
+table.currentTable {
+	border:1px solid green;
+	padding:5px;
+	margin:auto;
+	width:400px;
+}
+
+table.currentTable td {
+	padding:5px;
+}
+
+table.currentTable button {
+	font-size:14pt;
+	padding:.5em;
+	}
+.tcell {
+
+	width:50px;
+	height:50px;
+
+}
+
+</style>
+
+{% endblock %}
+
+{% block mainbox  %}
+
+<div class="std_div2">
+	<div class="titleBox">
+		<span class="title">{{ tableTitle }}</span>
+	</div>
+	
+	<form   method='POST'>
+	{% csrf_token %}
+		{% if perms.rsvn.delete_rsvn %}
+	<div style="padding:1em;text-align:center;background-color:white;">
+		<span style="font-size:12pt; font-weight:bold; color:brown;" >Admin Control Panel</span>
+		<button style="margin-left:2em;" class="clean-button" name='brcUpdate' >Update to Computer Current</button>
+		<button style="margin-left:6em;color:red; background-color:yellow"  class="clean-button" name='brcReset' >Reset and Clear all Settings</button>
+		
+		<select style="margin-left:50px" name="archive"> 
+		{% for log in logs %}
+			<option value="{{ log.id }}" >{{ log.date|date:'D m/d/y' }} </option>	
+		{% endfor %}	
+		</select> View Archive <button name="viewArchive" > View</button>
+			
+	</div>
+		{% endif %}
+
+	<div>
+		<ul class='legend'>
+			<li style='background-color:red; color:yellow;'>Occupied</li>
+			<li style='background-color:silver; color:black;'>Dirty</li>
+			<li style='background-color:yellow; color:black;'>Sched for Cleaning</li>
+			<li style='background-color:black; color:white;'>Out of Comission</li>
+			<li style='background-color:white; color:black;'>Clean and Vacant</li>
+		</ul>
+	</div>
+	
+	<div>
+		{% if rInfoList %}
+		<table id='statusGrid'>
+			{% autoescape off %}
+			{% for r in rInfoList %}
+				{{ r }}
+			{% endfor %}		
+			{% endautoescape %}
+		</table>
+		{% endif %} 
+	</div>
+</div>
+
+
+
+<script>
+        $( "#currentMenu").css("background-color","navajowhite")
+</script>
+</form>
+
+{% endblock %}
+
+
+
+{% block footer  %} {% endblock %}
+
+
+
