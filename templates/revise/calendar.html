@@ -223,7 +223,7 @@ h3 {
 			<div class='sdiv'>
 				{% for s in dailyList%}
 					{% for l in s.roomset %}
-						<a href="{% url 'calendar' s.rsvn.id %}" >{{ l.roominfo.number }}</a>,
+						<a href="{% url 'calendar' s.rsvn.id %}" >{{ l.roominfo.number }}</a>, 
 					{% endfor %}
 				{% endfor %}	
 			</div>
@@ -232,7 +232,7 @@ h3 {
 			<div class='sdiv'>
 				{% for s in rsvn7 %}
 					{% for l in s.roomset %}
-						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>,
+						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>, 
 					{% endfor %}
 				{% endfor %}	
 			</div>
@@ -240,7 +240,7 @@ h3 {
 			<div class='sdiv'>
 				{% for s in rsvn30 %}
 					{% for l in s.roomset %}
-						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>,
+						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>, 
 
 					{% endfor %}
 				{% endfor %}	
