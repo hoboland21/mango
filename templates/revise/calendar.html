@@ -232,7 +232,7 @@ h3 {
 			<div class='sdiv'>
 				{% for s in rsvn7 %}
 					{% for l in s.roomset %}
-						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>
+						<a href="{% url 'calendar' s.id %}" >{{ l.roominfo.number }}</a>,
 					{% endfor %}
 				{% endfor %}	
 			</div>
@@ -292,17 +292,13 @@ h3 {
 		</div>	
 
 		<div class='bigCellWrap'>
+		{% if eventList %}
+			{% include  'revise/calendar_event_cell_heading.html' %}
+		{%  endif %}
 
 		{% for event in  eventList %}
-			<table class="cellTable"  width="100%">
-				<tr>
-					<td width="200px"><a href="/rsvn/calendar/{{ event.rsvn.id}}" >{{ event.title }}</a></td>
-					<td width="180px"><span class="capLabels">Start:</span>{{ event.dateStart }}</td>
-					<td width="180px"><span class="capLabels">End:</span> {{ event.dateEnd }}</td>
-					<td width="180px"><span class="capLabels">Pax:</span> {{ event.pax }}</td>
-					<td><span class="capLabels">Descr:</span> {{ cal.descr }}</td>
-				</tr> 
-			</table>
+			{% include  'revise/calendar_event_cell.html' %}
+
 		{% endfor %}	
 		</div>
 	</div>		

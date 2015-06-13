@@ -158,6 +158,9 @@ class CalView (VClass)	 :
 	#-------------------------------------------------------
 		# event s
 		self.calEvent = Event.objects.filter(dateStart__lte = self.thisDate,dateEnd__gte = self.thisDate).exclude(rsvn__status__exact='cancel')
+		for cal in self.calEvent :
+				cal.roomset = cal.rsvn.room_set.all().order_by('roominfo__number')
+
 		self.eCalEvent = SideEvent.objects.filter(dateStart__lte = self.thisDate,dateEnd__gte = self.thisDate)
 		### Create eventList which contains both type with a pointer
 		elist = []
