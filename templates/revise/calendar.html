@@ -313,14 +313,14 @@ h3 {
 
 				<tr>
 				<td style="width:200px">Check Ins</td>
-				{% for stat in in_statlist %}
-					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" class= " {{ stat.class }}"> {{ stat.item }}-{{ stat.value }} </td> 
-				{% endfor %}
 				{% if in_statlist %}
 					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" > Pax-{{ check_in_pax }} </td> 
+
+					{% for stat in in_statlist %}
+					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" class= " {{ stat.class }}"> {{ stat.item }}-{{ stat.value }} </td> 
+					{% endfor %}
+					<td>Rooms - {% for r in inRooms %} {{ r }}, {% endfor %} </td>
 				{% endif %}
-
-
 				</tr>
 			</table>
 		</div>	
@@ -350,12 +350,15 @@ h3 {
 			<table >
 				<tr>
 					<td style="width:200px">Check Outs</td>
-					{% for stat in out_statlist %}
-						<td style="padding:10px 20px;font-family:smallCaps;font-size:11pt" class="{{ stat.class }}"> {{ stat.item }}-{{ stat.value }} </td> 
-					{% endfor %}
-				{% if out_statlist %}
-					<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" > Pax - {{ check_out_pax }} </td> 
-				{% endif %}
+					{% if out_statlist %}
+						<td style=" padding:10px 20px;font-family:smallCaps; font-size:11pt" > Pax - {{ check_out_pax }} </td> 
+						{% for stat in out_statlist %}
+							<td style="padding:10px 20px;font-family:smallCaps;font-size:11pt" class="{{ stat.class }}"> {{ stat.item }}-{{ stat.value }} </td> 
+						{% endfor %}
+						<td>Rooms - {% for r in outRooms %} {{ r }}, {% endfor %} </td>
+					{% endif %}
+
+
 				</tr>
 			</table>
 <!-- @ Statistics table -->			

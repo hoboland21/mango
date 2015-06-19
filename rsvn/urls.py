@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 from  rsvn import views
-from rsvn.vc import  event, calendar, agent, detailEdit, detailList, chat, service, grid, occupancy, available, current,invoice,rates,webres
+from rsvn.vc import  event, calendar, agent, detailEdit, detailList, chat, service, grid, occupancy, available, current,invoice,rates,webres,excelView
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
@@ -28,6 +28,8 @@ urlpatterns = patterns('',
 	url(r'^current/$',current.currentView.as_view(), name='current'),
 	url(r'^webres/$',webres.WebResView.as_view(), name='webres'),
 	url(r'^webres/(?P<webid>\d+)/$',webres.WebMake.as_view(), name='webmake'),
+
+	url(r'^excel/$',excelView.ExcelView.as_view(), name='excel')
 
 #	url(r'^gridView/(?P<rsvnid>\d+)/$', views.gridViewRsvn, name='gridViewRsvn'),
 #	url(r'^seperate/(?P<rsvnid>\d+)/$',views.seperate, name='seperate'),

@@ -80,8 +80,14 @@ class CalView (VClass)	 :
 		self.result['rsvn7'] = rsvn7
 		self.result['rsvn30'] = rsvn30
 
-	
-			
+	#-------------------------------------------------------
+	def roomList(self,roomquery) :
+	#-------------------------------------------------------
+		roomlist = []
+		for rq  in roomquery :
+			roomobj = RoomInfo.objects.get(id__exact=rq.roominfo.id)
+			roomlist.append(roomobj.number)
+		return sorted(roomlist)		
 	#-------------------------------------------------------
 	def scanRoomData(self) :
 	#-------------------------------------------------------
@@ -91,8 +97,14 @@ class CalView (VClass)	 :
 		self.chkoutRooms = Room.objects.filter(rsvn__dateOut__exact = self.thisDate).exclude(rsvn__status__exact='cancel')			
 		self.result['in_house_statlist'] 	= self.roomStats(self.inHouse)
 		self.result['in_statlist'] 			= self.roomStats(self.chkinRooms)
+		self.result['inRooms']				= self.roomList(self.chkinRooms)
+
 		self.result['out_statlist'] 		= self.roomStats(self.chkoutRooms)
+		self.result['outRooms']				= self.roomList(self.chkoutRooms)
+
 		self.result["calHouse"] 			= self.inHouse
+	
+
 	#-------------------------------------------------------
 	def scanRsvnData(self) :
 	#-------------------------------------------------------
@@ -137,6 +149,7 @@ class CalView (VClass)	 :
 			jt = len(query.filter(roominfo__type__exact = RT[0]))
 			if jt > 0 :
 				result.append({'item' : RT[1], 'value' : jt, 'class' : RT[0] })
+		
 		
 		return result
 #-------------------------------------------------------

@@ -1,0 +1,23 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+
+{% endblock %}
+
+{% block mainbox  %}
+
+<form method="POST">
+	{% csrf_token %}
+	<div style="border-top:1px solid green"> 
+		{% include 'revise/dateSelect.html' %}
+	</div>
+</form>
+<table>
+{% for room in roomListing %}
+<tr><td>{{ room.number }}</td><td>{{ room.roomlist }}</td></tr>
+
+{% endfor %}
+</table>
+
+
+{% endblock %}

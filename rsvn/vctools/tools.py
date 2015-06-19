@@ -90,5 +90,3 @@ def moneyfmt(value, places=2, curr='$', sep=',', dp='.', pos='', neg='-', trailn
     build(neg if sign else pos)
     return ''.join(reversed(result))
 
-
-
