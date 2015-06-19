@@ -38,18 +38,20 @@ class ExcelView (VClass) :
 		self.dateEnd = datetime.strptime(self.args['dateEnd'],"%Y-%m-%d")
 		self.numDays = (self.dateEnd - self.dateStart).days + 1
 
-		self.roomListing = RoomInfo.objects.all().order_by('number')
+		self.roomInfoList = RoomInfo.objects.all().order_by('number')
 
-
-		for rl in self.roomListing :
-			rl.roomlist = Room.objects.filter(
+		roomlist = Room.objects.filter(
 			Q(rsvn__dateIn__gte = self.dateStart,  rsvn__dateIn__lte= self.dateEnd  )   |
 			Q(rsvn__dateOut__gt = self.dateStart,  rsvn__dateOut__lt= self.dateEnd  )  |
 			Q(rsvn__dateIn__lte = self.dateStart,   rsvn__dateOut__gte= self.dateEnd  )
 			).exclude(rsvn__status__exact='cancel')
 
+		# roomlist has current rooms
+		for rl in self.roomInfoList :
+			rl.guest = roomlist.filter(roominfo__number__exact=rl.number )
+
 
 
 		self.args_send()
 	
-		self.result['roomListing']= self.roomListing
+		self.result['roomListing']= self.roomInfoList
