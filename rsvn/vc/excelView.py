@@ -48,8 +48,12 @@ class ExcelView (VClass) :
 
 		# roomlist has current rooms
 		for rl in self.roomInfoList :
-			rl.guest = roomlist.filter(roominfo__number__exact=rl.number )
-
+			guestroom = roomlist.filter(roominfo__number__exact=rl.number )
+			if guestroom :
+				gr = guestroom[0]
+				rsn = Rsvn.objects.filter(pk__exact=gr.rsvn.id)
+				if rsn  :
+					rl.guest = rsn[0]	
 
 
 		self.args_send()
