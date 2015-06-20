@@ -1,7 +1,17 @@
 {% extends "revise/base-new.html" %}
 
 {% block style   %}
+<style>
 
+.grid {
+	margin:auto;
+}
+
+.grid td,tr {
+	border:1px solid blue;
+	padding:1em;
+}
+</style>
 {% endblock %}
 
 {% block mainbox  %}
@@ -12,10 +22,18 @@
 		{% include 'revise/dateSelect.html' %}
 	</div>
 </form>
-<table width='90%'>
+<table class="grid">
 {% for room in roomListing %}
-<tr><td>{{ room.number }}</td><td>{{room.guest.firstname }}</td><td>{{room.guest.lastname  }}</td><td>{{room.guest.dateIn  }}</td><td>{{room.guest.dateOut  }}</td></tr>
+	{% for guest in room.guestroom %}
+		<tr><td>
+			{% if forloop.first %}		
+				{{ room.number }}
+			{% endif %}	
+			</td>
+			<td>{{guest.record.firstname }}</td><td>{{guest.record.lastname  }}</td>
+			<td>{{guest.record.dateIn  }}</td><td>{{guest.record.dateOut  }}</td></tr>
 
+	{% endfor %}	
 {% endfor %}
 </table>
 
