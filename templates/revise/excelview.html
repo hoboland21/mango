@@ -5,11 +5,12 @@
 
 .grid {
 	margin:auto;
+	border-collapse: collapse;
 }
 
 .grid td,tr {
 	border:1px solid blue;
-	padding:1em;
+	padding:.4em;
 }
 </style>
 {% endblock %}
@@ -23,6 +24,7 @@
 	</div>
 </form>
 <table class="grid">
+<tr><td colspan=6 style="text-align:center;font-size:14pt; font-weight:bold">Mango Property History</td><tr><td colspan=6 style="text-align:center;font-size:14pt; ">{{ dateStart}} - {{ dateEnd }}</td></tr>
 {% for room in roomListing %}
 	{% for guest in room.guestroom %}
 		<tr><td>
@@ -31,7 +33,9 @@
 			{% endif %}	
 			</td>
 			<td>{{guest.record.firstname }}</td><td>{{guest.record.lastname  }}</td>
-			<td>{{guest.record.dateIn  }}</td><td>{{guest.record.dateOut  }}</td></tr>
+			<td>{{guest.record.dateIn  }}</td><td>{{guest.record.dateOut  }}</td>
+			<td>{{guest.record.country  }}</td>
+			</tr>
 
 	{% endfor %}	
 {% endfor %}
