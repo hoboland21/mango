@@ -10,10 +10,10 @@ TypeNameDict = {
 	'standard' :'Standard',	'deluxe': 'Deluxe',
 	'pool_deluxe' :'Pool Deluxe',	'lanai' : 'Lanai',
 	'presidential' : 'Presidential',	'manor' : 'Manor',
-	'suites':'Suites'
+	'suites':'Suites','garden':'Garden'
 	}
 
-SortOrderDict =  [ 	'standard','deluxe','pool_deluxe','lanai','presidential','manor','suites']
+SortOrderDict =  [ 	'standard','deluxe','pool_deluxe','lanai','presidential','manor','suites','garden']
 
 VACANT 		= 0
 OCCUPIED 	= 1
