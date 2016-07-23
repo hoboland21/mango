@@ -22,12 +22,13 @@ def getGridColor(rsvnid) :
 #===========================================
 TypeNameList = [
 	['standard', 		'Standard'],
-	['deluxe', 			'Deluxe'],
+	['deluxe', 		'Deluxe'],
 	['pool_deluxe', 	'Pool Deluxe'],
-	['lanai' , 			'Lanai'],
+	['lanai' , 		'Lanai'],
 	['presidential',	'Presidential'],
-	['manor', 			'Manor'],
-	['suites',			'Suites'],
+	['manor', 		'Manor'],
+	['suites',		'Suites'],
+	['garden',		'Garden'],
 	]
 
 
@@ -38,7 +39,7 @@ class gridView(VClass)	 :
 	def main(self) :
 	# ---------------
 
-		self.validTypeList = ['standard','deluxe','pool_deluxe','lanai','presidential','manor','suites']
+		self.validTypeList = ['standard','deluxe','pool_deluxe','lanai','presidential','manor','suites','garden']
 
 		self.rsvnid = int(self.kwargs['rsvnid'])
 		self.result['rsvnid'] = self.rsvnid

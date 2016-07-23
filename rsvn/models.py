@@ -60,7 +60,8 @@ ROOM_TYPE_CHOICES = (
    ('lanai','Lanai'),
    ('presidential','Presidential'),
    ('manor','Manor'),
-   ('suites','Suites')
+   ('suites','Suites'),
+   ('garden','Garden'),
    )#---------------------------------------------------------
 RATE_TYPE_CHOICES = (
    ('standard','Standard'),
@@ -70,8 +71,8 @@ RATE_TYPE_CHOICES = (
    ('presidential','Presidential'),
    ('manor','Manor'),
    ('SERVICE','SERVICE'),
-   ('suites','Suites')
-   
+   ('suites','Suites'),
+   ('garden','Garden'),
    )
 
 
