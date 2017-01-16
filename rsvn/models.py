@@ -214,6 +214,8 @@ ROOM_TYPE_DICT = {
    'presidential':'Presidential'
    
    }
+roomStateDict = { 0:'CLEAN',1:'OCCUPIED',2:'DIRTY',3:'SCHED',4:'OOC',5:'BB',6:'ATTN'}
+roomStateDictReverse = {'CLEAN':0,'OCCUPIED':1,'DIRTY':2,'SCHED':3,'OOC':4,'BB':5,'ATTN':6}
 
 #---------------------------------------------------------
 class WebRsvn (models.Model):
@@ -497,6 +499,8 @@ class RoomInfo (models.Model):
 
 		fullname = "Room %s - %s - %s Beds" % (self.number, self.type,self.beds )
 		return(fullname)
+	def currentText(self):
+		return roomStateDict[self.current]	
 #---------------------------------------------------------
 class RoomInfoAdmin(admin.ModelAdmin) :
 	list_display = ('type', 'number', 'beds','connect', 'notes')

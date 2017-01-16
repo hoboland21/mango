@@ -273,8 +273,6 @@
 					<span style="margin:5px; font-size:12pt; font-weight:bold; ">{{ rms.roominfo.number }} </span>
 					<span style="margin:5px; font-size:10pt">{{ rms.roominfo.beds }} Beds</span>
 					<span style="margin:5px; ">
-						<button style="font-size:7pt;width:32px; margin-left:10px;  {% if rms.roomstatus == 'none' %} background-color:white;  font-weight:bold;{% endif %} "
-						   name="roomNoneSelect" value="{{ rms.roominfo.number }}">VAC</button>
 						<button style="font-size:7pt;width:32px; margin-left:10px; {% if rms.roomstatus == 'checkin' %} background-color:green;  color:white; font-weight:bold;{% endif %}"
 						   name="roomInSelect" value="{{ rms.roominfo.number }}">IN</button>
 						<button style="font-size:7pt;width:32px; margin-left:10px; {% if rms.roomstatus == 'checkout' %} background-color:royalblue; color:white; font-weight:bold;{% endif %}"
@@ -286,7 +284,6 @@
 			</div>
 			<div style="padding:5px">
 				<span style="font-size:10pt; font-weight:bold">Global Select</span>
-				<button  style="margin-left:15px;" class="small-button" name="globalNone">VAC</button>
 				<button  style="margin-left:15px;" class="small-button" name="globalIn">IN</button>
 				<button  style="margin-left:15px;" class="small-button" name="globalOut">OUT</button>
 			

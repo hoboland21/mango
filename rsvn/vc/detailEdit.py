@@ -216,10 +216,10 @@ class RsvnUpdate (VClass) :
 			room.save()
 
 		#pressing roomNoneStatus 
-		if self.arg_check("roomNoneSelect") :
-			room = Room.objects.get(rsvn__id=self.rsvnid,roominfo__number=self.args_put["roomNoneSelect"])
-			room.roomstatus = "none"
-			room.save()
+#		if self.arg_check("roomNoneSelect") :
+#			room = Room.objects.get(rsvn__id=self.rsvnid,roominfo__number=self.args_put["roomNoneSelect"])
+#			room.roomstatus = "none"
+#			room.save()
 		#==========================
 		# we check for a global button push
 		check = ""
@@ -230,8 +230,8 @@ class RsvnUpdate (VClass) :
 		if self.arg_check("globalOut") :
 			check="checkout"
 		#pressing globalNone 
-		if self.arg_check("globalNone") :
-			check="none"
+#		if self.arg_check("globalNone") :
+#			check="none"
 
 		if check != "" :
 			for room in Room.objects.filter(rsvn__id=self.rsvnid) :
