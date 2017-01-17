@@ -164,18 +164,23 @@ class currentView(VClass) :
 				#we seperate to one Room object focused on
 				rn = rObjs[0]
 				#Checking for errors
-				if rn.roomstatus != rn.rsvn.status :
-					errorList[ri.number] = "ERROR_FLAG"	
+				if rn.rsvn.status in [ "checkin", "checkout"] :
+					if rn.roomstatus != rn.rsvn.status :
+						errorList[ri.number] = "ERROR_FLAG"	
+						#print ("DEBUG Room",ri.number," - ",rn.roomstatus," - ",rn.rsvn.status)
 
 				if rn.roomstatus == "checkin" :
 					# this overrides everything and occupies the room
 					roomList[ri.number] = "OCCUPIED"
-					self.updateState(ri.number,OCCUPIED)
+					ri.current = OCCUPIED
+					ri.save()
 
 				# if the room is checked out and occupied make it dirty
 				elif rn.roomstatus == "checkout" and ri.current not in [OOC,SCHED,CLEAN] :
 					# checkout without any changes 
 					roomList[ri.number] = "DIRTY"
+					ri.current =  DIRTY
+					ri.save()
 
 		return roomList,errorList
 
