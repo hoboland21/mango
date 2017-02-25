@@ -28,7 +28,7 @@ TypeNameCountList = [
 	['lanai' , 			'Lanai' 		,4 ] ,
 	['presidential',	'Presidential'	,1],
 	['suites',			'Suites'		,17],
-	['manor',			'Manor'			,3]
+	['manor',			'Manor'			,21]
 	]
 
 HotelNameList = ['standard','deluxe','pool_deluxe','lanai','presidential' ]

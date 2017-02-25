@@ -15,8 +15,9 @@ TypeNameCountList = [
 	['pool_deluxe', 	'Pool Deluxe'	,12],
 	['lanai' , 			'Lanai' 		,4 ] ,
 	['presidential',	'Presidential'	,1],
-	['manor', 			'Manor' 		,3],
+	['manor', 			'Manor' 		,21],
 	['suites',			'Suites'		,17],
+	['garden',			'Garden'		,6],
 	]
 
 
