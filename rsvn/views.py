@@ -2,8 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import *
 from django.contrib.auth.views  import logout_then_login
 
-from django.core.context_processors import csrf
-from django.core.urlresolvers import reverse
+#from django.core.context_processors import csrf
+#from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404, render, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -34,14 +34,14 @@ def admin(request) :
 
 	#=====================================
 
-	return  render_to_response('rsvn/admin.html',result,context_instance=RequestContext(request) )
+	return  render(request,'rsvn/admin.html',result )
 
 #=====================================================================
 
 @login_required
 def index(request):
 	result= {}
-	result.update (csrf(request))
+#	result.update (csrf(request))
 	return render_to_response('rsvn/index.html',result )
 
 #=====================================================================
@@ -83,8 +83,8 @@ def current(request) :
 
 	result['currentStatus'] = brc.roomGrid()
 
-	result.update (csrf(request))
-	return render_to_response('revise/current.html',result,context_instance=RequestContext(request) )
+	
+	return render(request,'revise/current.html',result)
 
 
 #=====================================================================
@@ -102,7 +102,7 @@ def available(request):
 	avi = AvailabilityGrid(dateStart,dateEnd)
 	result.update(avi.result)
 
-	result.update (csrf(request))
+	
 
-	return render_to_response('revise/available.html',result,context_instance=RequestContext(request) )
+	return render(request,'revise/available.html',result)
 

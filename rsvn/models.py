@@ -354,7 +354,7 @@ class RateHeadingAdmin(admin.ModelAdmin) :
 
 #---------------------------------------------------------
 class RateAtom(models.Model):
-	rateheading =   models.ForeignKey(RateHeading)
+	rateheading =   models.ForeignKey(RateHeading,on_delete=models.CASCADE)
 	rateName	=	models.CharField(max_length=512, blank=True)
 	rateType	=  	models.CharField(max_length=128, choices=RATE_TYPE_CHOICES)
 	lowSeason	= 	models.DecimalField(max_digits=12, decimal_places=2,default=Decimal('00.00'))
@@ -397,14 +397,14 @@ class AgentForm(ModelForm) :
 
 #--------------------------------------------------------------------
 class AgentRate(models.Model) :
-	agent 			= 	models.ForeignKey(Agent)
-	rateheading		=	models.ForeignKey(RateHeading)
+	agent 			= 	models.ForeignKey(Agent,on_delete=models.CASCADE)
+	rateheading		=	models.ForeignKey(RateHeading,on_delete=models.CASCADE)
 
 
 
 #--------------------------------------------------------------------
 class Service (models.Model):
-	rsvn			= 	models.ForeignKey(Rsvn)
+	rsvn			= 	models.ForeignKey(Rsvn,on_delete=models.CASCADE)
 	breakfast		=	models.BooleanField(default=False)
 	lunch			=	models.BooleanField(default=False)
 	dinner			=	models.BooleanField(default=False)
@@ -441,8 +441,8 @@ class ServiceForm(ModelForm) :
 
 #=========================================================
 class Tour (models.Model):
-	agent			= 	models.ForeignKey(Agent)
-	rsvn			= 	models.ForeignKey(Rsvn)
+	agent			= 	models.ForeignKey(Agent,on_delete=models.CASCADE)
+	rsvn			= 	models.ForeignKey(Rsvn,on_delete=models.CASCADE)
 	arrive_flight	= 	models.CharField(max_length=30, blank=True)
 	arrive_time		=	models.DateTimeField()
 	depart_flight	= 	models.CharField(max_length=30, blank=True)
@@ -467,7 +467,7 @@ class TourForm(ModelForm) :
 
 #=========================================================
 class Scheme (models.Model):
-	rsvn		= 	models.ForeignKey(Rsvn)
+	rsvn		= 	models.ForeignKey(Rsvn,on_delete=models.CASCADE)
 	gridColor 	= 	models.CharField(max_length=15,choices=COLORLIST,default='white')
 	rsvnColor   = 	models.CharField(max_length=15,choices=COLORLIST,default='white')
 	extraColor	= 	models.CharField(max_length=15,choices=COLORLIST,default='white')
@@ -508,8 +508,8 @@ class RoomInfoAdmin(admin.ModelAdmin) :
 
 #---------------------------------------------------------
 class Room (models.Model):
-	rsvn		=    models.ForeignKey(Rsvn)
-	roominfo 	=	 models.ForeignKey(RoomInfo)
+	rsvn		=    models.ForeignKey(Rsvn,on_delete=models.CASCADE)
+	roominfo 	=	 models.ForeignKey(RoomInfo,on_delete=models.CASCADE)
 	info		=  	 models.CharField(max_length=512, blank=True)
 	roomstatus	=	 models.CharField(max_length=13, choices=ROOM_STATUS,blank=True)
 
@@ -526,7 +526,7 @@ class RoomForm(ModelForm) :
 
 #---------------------------------------------------------
 class Event(models.Model) :
-	rsvn		= models.ForeignKey(Rsvn)
+	rsvn		= models.ForeignKey(Rsvn,on_delete=models.CASCADE)
 	title		= models.CharField(max_length=128)
 	pax			= models.IntegerField(validators = [ MinValueValidator(1) ])
 	descr		= models.TextField()
@@ -605,8 +605,8 @@ class CurrentLog(models.Model) :
 
 #---------------------------------------------------------
 class Invoice(models.Model) :
-	rsvn			= 	models.ForeignKey(Rsvn)
-	rateheading 	=	models.ForeignKey(RateHeading)
+	rsvn			= 	models.ForeignKey(Rsvn,on_delete=models.CASCADE)
+	rateheading 	=	models.ForeignKey(RateHeading,on_delete=models.CASCADE)
 	rateName		=	models.CharField(max_length=512)
 	number			=	models.CharField(max_length=100)
 	date_created	=	models.DateField(auto_now=True)
@@ -616,7 +616,7 @@ class Invoice(models.Model) :
 
 #---------------------------------------------------------
 class InvoiceEntry(models.Model) :
-	invoice	= 	models.ForeignKey(Invoice)
+	invoice	= 	models.ForeignKey(Invoice,on_delete=models.CASCADE)
 	clerk	= 	models.CharField(max_length=40)
 	time	= 	models.DateTimeField(auto_now=True)
 	type   	= 	models.CharField(max_length=64)
@@ -633,7 +633,7 @@ class InvoiceEntryForm(ModelForm) :
 	
 #---------------------------------------------------------
 class RsvnBlog(models.Model) :
-	rsvn	= 	models.ForeignKey(Rsvn)
+	rsvn	= 	models.ForeignKey(Rsvn,on_delete=models.CASCADE)
 	clerk	= 	models.CharField(max_length=40)
 	time	= 	models.DateTimeField(auto_now=True)
 	desc	=	models.TextField()

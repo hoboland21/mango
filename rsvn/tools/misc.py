@@ -27,7 +27,7 @@ class MView(View) :
 		self.args_put = request.POST
 		self.request = request
 		self.main()
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(request,self.template_name,self.result)
 	# ---------------
 	def arg_check(self,arg) :
 		if arg in self.args_put :
@@ -38,7 +38,7 @@ class MView(View) :
 		self.args_get = request.GET
 		self.request = request
 		self.main()
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(request,self.template_name,self.result )
 		
 #=====================================================================
 

@@ -74,7 +74,7 @@
 
 <div id="loginScreen">
 
-	<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+	<form method="POST" action="{% url 'login' %}">
 	{% csrf_token %}
 	<h3>Mango Resort Reservation System</h3>
 	<table>

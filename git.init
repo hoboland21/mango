@@ -1,0 +1,7 @@
+#!/bin/bash
+
+git config --global user.email "jc@saipantech.com"
+git config --global user.name "JC Clark"
+git config --global push.default simple
+git config credential.helper store
+

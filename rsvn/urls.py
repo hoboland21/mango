@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import  url
 from  rsvn import views
 from rsvn.vc import  event, calendar, agent, detailEdit, detailList, chat, service, grid, occupancy, available, current,invoice,rates,webres,excelView
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', views.index, name='index'),
 
 	url(r'^detail/list/(?P<rsvnid>\d+)/$',detailList.RsvnList.as_view(), name='rsvnlist'),
@@ -35,4 +35,4 @@ urlpatterns = patterns('',
 #	url(r'^seperate/(?P<rsvnid>\d+)/$',views.seperate, name='seperate'),
 #	 url(r'^(?P<rsvnid>\d+)/$', views.detail, name='detail'),
 
-)
+]

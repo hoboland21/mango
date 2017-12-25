@@ -27,7 +27,7 @@ class RsvnCreate (VClass) :
 		self.main()
 		if self.rsvnid :
 			return redirect ('rsvnupdate',self.rsvnid)
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(request,self.template_name,self.result )
 
 	# ==========================================================
 	def loadBlankForm(self) :
@@ -111,7 +111,7 @@ class RsvnUpdate (VClass) :
 		if self.rsvnid != self.rsvn.id :
 			return redirect ('rsvnupdate',self.rsvnid)
 				
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(request,self.template_name,self.result)
 
 	#----------------------------------
 	def main(self) :

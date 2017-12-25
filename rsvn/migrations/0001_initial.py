@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='AgentRate',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
-                ('agent', models.ForeignKey(to='rsvn.Agent')),
+                ('agent', models.ForeignKey(to='rsvn.Agent',on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
                 ('cost', models.DecimalField(max_digits=12, decimal_places=2)),
                 ('units', models.IntegerField(default=1)),
                 ('amount', models.DecimalField(max_digits=12, decimal_places=2)),
-                ('invoice', models.ForeignKey(to='rsvn.Invoice')),
+                ('invoice', models.ForeignKey(to='rsvn.Invoice',on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -158,7 +158,7 @@ class Migration(migrations.Migration):
                 ('clerk', models.CharField(max_length=40)),
                 ('time', models.DateTimeField(auto_now=True)),
                 ('desc', models.TextField()),
-                ('rsvn', models.ForeignKey(to='rsvn.Rsvn')),
+                ('rsvn', models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -168,7 +168,7 @@ class Migration(migrations.Migration):
                 ('gridColor', models.CharField(default='white', max_length=15, choices=[('White', 'White'), ('Burlywood', 'Burlywood'), ('Red', 'Red'), ('Cyan', 'Cyan'), ('Blue', 'Blue'), ('Green', 'Green'), ('Orange', 'Orange'), ('RoyalBlue', 'RoyalBlue'), ('Orchid', 'Orchid'), ('NavajoWhite', 'NavajoWhite'), ('Maroon', 'Maroon'), ('Sienna', 'Sienna'), ('Yellow', 'Yellow'), ('Purple', 'Purple'), ('DarkKhaki', 'DarkKhaki'), ('Salmon', 'Salmon'), ('SeaGreen', 'SeaGreen'), ('OrangeRed', 'OrangeRed'), ('YellowGreen', 'YellowGreen'), ('DarkCyan', 'DarkCyan'), ('Black', 'Black'), ('HotPink', 'HotPink'), ('Gray', 'Gray'), ('Coral', 'Coral'), ('SaddleBrown', 'SaddleBrown'), ('SlateBlue', 'SlateBlue')])),
                 ('rsvnColor', models.CharField(default='white', max_length=15, choices=[('White', 'White'), ('Burlywood', 'Burlywood'), ('Red', 'Red'), ('Cyan', 'Cyan'), ('Blue', 'Blue'), ('Green', 'Green'), ('Orange', 'Orange'), ('RoyalBlue', 'RoyalBlue'), ('Orchid', 'Orchid'), ('NavajoWhite', 'NavajoWhite'), ('Maroon', 'Maroon'), ('Sienna', 'Sienna'), ('Yellow', 'Yellow'), ('Purple', 'Purple'), ('DarkKhaki', 'DarkKhaki'), ('Salmon', 'Salmon'), ('SeaGreen', 'SeaGreen'), ('OrangeRed', 'OrangeRed'), ('YellowGreen', 'YellowGreen'), ('DarkCyan', 'DarkCyan'), ('Black', 'Black'), ('HotPink', 'HotPink'), ('Gray', 'Gray'), ('Coral', 'Coral'), ('SaddleBrown', 'SaddleBrown'), ('SlateBlue', 'SlateBlue')])),
                 ('extraColor', models.CharField(default='white', max_length=15, choices=[('White', 'White'), ('Burlywood', 'Burlywood'), ('Red', 'Red'), ('Cyan', 'Cyan'), ('Blue', 'Blue'), ('Green', 'Green'), ('Orange', 'Orange'), ('RoyalBlue', 'RoyalBlue'), ('Orchid', 'Orchid'), ('NavajoWhite', 'NavajoWhite'), ('Maroon', 'Maroon'), ('Sienna', 'Sienna'), ('Yellow', 'Yellow'), ('Purple', 'Purple'), ('DarkKhaki', 'DarkKhaki'), ('Salmon', 'Salmon'), ('SeaGreen', 'SeaGreen'), ('OrangeRed', 'OrangeRed'), ('YellowGreen', 'YellowGreen'), ('DarkCyan', 'DarkCyan'), ('Black', 'Black'), ('HotPink', 'HotPink'), ('Gray', 'Gray'), ('Coral', 'Coral'), ('SaddleBrown', 'SaddleBrown'), ('SlateBlue', 'SlateBlue')])),
-                ('rsvn', models.ForeignKey(to='rsvn.Rsvn')),
+                ('rsvn', models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -198,7 +198,7 @@ class Migration(migrations.Migration):
                 ('earlyin', models.BooleanField(default=False)),
                 ('lateout', models.BooleanField(default=False)),
                 ('event', models.BooleanField(default=False)),
-                ('rsvn', models.ForeignKey(to='rsvn.Rsvn')),
+                ('rsvn', models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -224,8 +224,8 @@ class Migration(migrations.Migration):
                 ('depart_flight', models.CharField(blank=True, max_length=30)),
                 ('depart_time', models.DateTimeField()),
                 ('promo', models.TextField(blank=True)),
-                ('agent', models.ForeignKey(to='rsvn.Agent')),
-                ('rsvn', models.ForeignKey(to='rsvn.Rsvn')),
+                ('agent', models.ForeignKey(to='rsvn.Agent',on_delete=models.CASCADE)),
+                ('rsvn', models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -253,36 +253,36 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='room',
             name='roominfo',
-            field=models.ForeignKey(to='rsvn.RoomInfo'),
+            field=models.ForeignKey(to='rsvn.RoomInfo',on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='room',
             name='rsvn',
-            field=models.ForeignKey(to='rsvn.Rsvn'),
+            field=models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='rateatom',
             name='rateheading',
-            field=models.ForeignKey(to='rsvn.RateHeading'),
+            field=models.ForeignKey(to='rsvn.RateHeading',on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='invoice',
             name='rateheading',
-            field=models.ForeignKey(to='rsvn.RateHeading'),
+            field=models.ForeignKey(to='rsvn.RateHeading',on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='invoice',
             name='rsvn',
-            field=models.ForeignKey(to='rsvn.Rsvn'),
+            field=models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='event',
             name='rsvn',
-            field=models.ForeignKey(to='rsvn.Rsvn'),
+            field=models.ForeignKey(to='rsvn.Rsvn',on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='agentrate',
             name='rateheading',
-            field=models.ForeignKey(to='rsvn.RateHeading'),
+            field=models.ForeignKey(to='rsvn.RateHeading',on_delete=models.CASCADE),
         ),
     ]

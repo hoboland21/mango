@@ -67,7 +67,7 @@ class VClass (View)	 :
 		self.request = request
 		self.main()
 		
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(self.request,self.template_name,self.result )
 
 	# ---------------
 	@method_decorator(login_required)
@@ -76,7 +76,7 @@ class VClass (View)	 :
 		self.args_get = request.GET
 		self.request = request
 		self.main()
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(self.request,self.template_name,self.result)
 
 
 #=====================================================================
@@ -133,7 +133,7 @@ class UVClass (View)	 :
 		self.request = request
 		self.main()
 		
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(self.request,self.template_name,self.result)
 
 	# ---------------
 	def get(self, request, *args, **kwargs) :
@@ -141,6 +141,6 @@ class UVClass (View)	 :
 		self.args_get = request.GET
 		self.request = request
 		self.main()
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(self.request,self.template_name,self.result )
 
 
