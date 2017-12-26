@@ -12,13 +12,13 @@ def confirm_gen (id) :
 #-------------------------------------------------------
 def serviceSplitter(service) :
 #-------------------------------------------------------
-	names = service._meta.get_all_field_names()
+	names = service._meta.get_fields()
 	servlist =[]	
 	for field in names :
-		value = getattr(service,field,None)
-		if value == True  and field in SERVICE_FIELDS:
+		value = getattr(service,field.name,None)
+		if value == True  and field.name in SERVICE_FIELDS:
 			
-			servlist.append([field, SERVICE_FIELDS[field],SERVICE_FIELDS_ABV[field] ])
+			servlist.append([field.name, SERVICE_FIELDS[field.name],SERVICE_FIELDS_ABV[field.name] ])
 	return servlist		
 
 #-------------------------------------------------------

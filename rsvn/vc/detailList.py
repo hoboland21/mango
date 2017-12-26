@@ -198,7 +198,7 @@ class RsvnList (VClass)	 :
 		# load a reservation to view in list header 
 		if self.rsvnid > 0 :
 			self.result['rsvnRec'] = rsvnidPacker(self.rsvnid)
-		self.result.update (csrf(self.request))
+#		self.result.update (csrf(self.request))
 	
 	#-------------------------------------------------------
 	def displayRList(self) :
