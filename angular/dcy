@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+  mysql:
+    build:
+      context: mysql
+    volumes:
+      - mysql-django-db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+
+  django:
+    build:
+      context: django
+    volumes:
+      - ./project-data:/usr/src/app/
+    ports:
+      - "9000:9000"
+    entrypoint:
+      - uwsgi
+      - --ini
+      - uwsgi.ini
+
+  angular:
+    build:
+      context: angular
+    volumes:
+      - ./project-data:/usr/src/app/
+    entrypoint: 
+      - ng
+      - build
+      - --prod
+      - --output-path
+      - /usr/src/app/django/mcsap/static/ang/dashboard
+      - --watch
+      - --output-hashing
+      - none
+
+  nginx:
+    build:
+      context: nginx
+    volumes:
+      - ./project-data:/usr/src/app/
+    ports:
+      - "80:80"
+
+volumes:
+  mysql-django-db: 
+    external : yes

@@ -1,0 +1,12 @@
+django 
+djangorestframework 
+django-filter
+whitenoise
+markdown
+django-cors-headers
+uwsgi
+mysqlclient
+configparser
+ipython
+celery
+pymongo

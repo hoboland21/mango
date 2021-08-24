@@ -1,0 +1,119 @@
+version: '3'
+
+services:
+#-------------------------------------
+
+  mysql:
+    build:
+      context: mysql
+    volumes:
+      - mysql-django-db:/var/lib/mysql
+      - ./project-data:/usr/src/app/
+
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+    networks:
+      mcsap_net:
+        ipv4_address: 172.28.1.2
+
+#-------------------------------------
+  rabbitmq:
+    build:
+      context: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbituser
+      RABBITMQ_DEFAULT_PASS: rabbitpass
+      RABBITMQ_DEFAULT_VHOST: rabbitmq
+    networks:
+      mcsap_net:
+        ipv4_address: 172.28.1.3
+#-------------------------------------
+
+  angular:
+    build:
+      context: angular
+    volumes:
+      - ./project-data:/usr/src/app/
+    entrypoint: 
+      - /bin/sh
+      - /usr/src/app/angular/startup.sh
+        
+    networks:
+      mcsap_net:
+        ipv4_address: 172.28.1.5
+#-------------------------------------
+
+  django:
+
+    build:
+      context: django
+
+    volumes:
+      - ./project-data:/usr/src/app/
+
+    ports:
+      - "9000:9000"
+
+
+    entrypoint: 
+      - /bin/sh
+      - /usr/src/app/django/startup.sh
+
+    depends_on:
+      - mysql
+      - rabbitmq
+      - angular
+    networks:
+      mcsap_net:
+        ipv4_address: 172.28.1.4
+
+
+#-------------------------------------
+
+  nginx:
+    build:
+      context: nginx
+    volumes:
+      - ./project-data:/usr/src/app/
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+    networks:
+      mcsap_net:
+        ipv4_address: 172.28.1.6
+#-------------------------------------
+
+#  sentry:
+#    build:
+#      context: sentry
+ #   volumes:
+  #    - ./project-data:/usr/src/app/
+#    entrypoint:
+#      - /bin/sh
+#      - /usr/src/app/sentry/startup.sh
+#    depends_on:
+#      - mysql
+#    networks:
+#      mcsap_net:
+#        ipv4_address: 172.28.1.7
+#-------------------------------------
+#  mongo:
+#    image: mongo
+#    restart:  always
+#    networks:
+#      mcsap_net:
+#        ipv4_address: 172.28.1.8
+
+
+networks:
+  mcsap_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+volumes:
+  mysql-django-db: 
+    external : yes    
