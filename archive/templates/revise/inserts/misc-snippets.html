@@ -1,0 +1,128 @@
+			<table>
+	{{ ServiceForm.as_table }}
+			</table>	
+		</div>
+
+		<table>
+	{{TourForm.as_table}}
+		</table>
+
+
+			<table>
+	{{ EventForm.as_table }}		
+	</table>
+	</div>
+
+
+	
+		
+
+
+		<!-- Color scheme -->
+		<div class="leftFrame" style="height:230px;width:220px;">
+			<div class='headText'>Color Scheme</div>
+			<table>
+				{{ SchemeForm.as_table }}
+			
+			{% if rsvnid > 0 %}
+				<tr><td colspan='2'>{{ rsvnRec.confirm }}</td></tr>
+				<tr><td colspan='2'>Clerk : {{ rsvnRec.clerk }}</td></tr>
+			{% endif %}
+			
+			</table>
+		</div>
+
+
+		<!--Blog Form scheme -->
+		<div class="leftFrame" style="height:230px">
+			<div class='headText'>Blog
+			<button name="saveBlog" class="clean-button">Save</button>
+
+			</div>
+			<table>
+				{{ RsvnBlogForm.as_table }}
+			</table>
+			<hr>
+			<div style="overflow-y:auto; height:100px;">
+			{% for brec in blogList %}
+
+					
+
+				<div>{{ brec.time|date:"m/d/y" }} {{ brec.time|time:"H:i" }} - {{brec.desc}}</div>
+			<hr>
+
+			{% endfor %}
+			</div>
+		</div>
+
+
+
+
+		
+			<button class="clean-button" style="margin-left:500px;" name="saveForm">Save Changes</button>
+	</div>
+
+
+
+	</form>
+  
+      <li class="nav-item">
+    	<a class="nav-link"  href="/rsvn/detail/list/{{rsvnid}}#current" >Return To List</a>
+      </li>
+      
+      <li class="nav-item">
+		<a class="nav-link"  href="/rsvn/invoice/{{rsvnid}}" >View Invoice</a>
+      </li>
+
+
+	
+ <!-- we leave the form to run some independant jquery button dialogs -->
+	<div style="background-color:white">
+	{% if perms.rsvn.delete_rsvn and rsvnid %}
+		<button class="clean-button" style="background-color:yellow; margin-left:50px;" id="delbutton" name="rsvnDelete" value="{{ rsvnid }}" > DELETE</button>
+	{% endif %}
+		<button style="margin-left:100px;" class="clean-button" id="dupbutton" name="rsvnDup" value="{{ rsvnid }}" > Duplicate</button>
+	</div>
+
+  <div id="log"></div>
+
+
+Nav bar drop box
+
+
+
+		<li class="active">
+			<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+			<ul class="collapse list-unstyled" id="homeSubmenu">
+				<li>
+					<a href="#">Home 1</a>
+				</li>
+				<li>
+					<a href="#">Home 2</a>
+				</li>
+				<li>
+					<a href="#">Home 3</a>
+				</li>
+			</ul>
+		</li>
+
+
+
+
+
+
+        			<li>
+				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+				<ul class="collapse list-unstyled" id="pageSubmenu">
+					<li>
+						<a href="#">Page 1</a>
+					</li>
+					<li>
+						<a href="#">Page 2</a>
+					</li>
+					<li>
+						<a href="#">Page 3</a>
+					</li>
+				</ul>
+			</li>
+

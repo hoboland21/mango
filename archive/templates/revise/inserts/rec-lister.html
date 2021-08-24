@@ -1,0 +1,54 @@
+<style>
+.table-button {
+    background-color:inherit;
+    border:none;
+    text-align:left;
+
+}
+.table-button:hover {
+    background-color:white;
+    border:1 px solid green;
+    
+
+}
+</style>
+<div class="frame-box">{{ qlist.count }} Results returned </div>
+<form  method="POST">
+    {% csrf_token %}
+    <table  class="table" id="rListerTable"  style="width:100%">
+
+        <tr>
+            <th>Confirm #</th>
+            <th>Status</th>
+            <th>Name</th>
+            <th>Date In</th>
+            <th>Date Out</th>
+            <th>Type</th>
+            <th>A</th>
+            <th>U</th>
+            <th>Clerk</th>
+        </tr>
+      {%for rv in qlist %}
+        <tr
+            {% if rv.highlight == '1' %}
+
+                style="background-color:white;" 
+            {% elif rv.highlight == '2' %}
+                style="background-color:red !important;" 
+            {% endif %}
+        >
+        
+            <td><button class="table-button" name="rsvnid" value="{{ rv.id }}">{{ rv.confirm }}</button></td>
+            <td>{{ rv.status}}</td>
+            <td><button class="table-button" name="rsvnid" value="{{ rv.id }}">{{ rv.firstname }} {{ rv.lastname }}</button></td>
+            <td>{{ rv.dateIn|date:"m/d/y" }}</td>
+            <td>{{ rv.dateOut|date:"m/d/y" }}</td>
+            <td >{{ rv.type }}</td>
+            <td > Rms-{{ rv.assigned }}</td>
+            <td > U-{{ rv.unassigned }}</td>
+            <td> {{ rv.clerk }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</form>

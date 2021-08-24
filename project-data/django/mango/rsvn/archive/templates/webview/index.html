@@ -1,0 +1,94 @@
+{% extends "webview/base.html" %}
+
+{% block head %}
+<style>
+
+	.dateEntry {
+		text-align: center;
+		color:white;
+		font-size:14pt;
+	}
+	
+	.dateTable{
+		width:100%;
+	}
+
+	.dateTable td,
+	.dateTable th
+	{
+		text-align: center;
+		padding:.25em;
+	}
+	input,
+	select {
+		background-color:{{ theme_back }};
+		padding:.3em;
+		color:white;
+		font-size: 14pt;
+		font-family:ExoRegular;
+	}
+	
+</style>
+{% endblock %}
+
+
+	{% block mainblock %}
+	<form method='POST'>
+		{% csrf_token %}
+
+	<div style="color:white">
+
+	
+
+		<div style="font-family:ExoRegular; color:#F99423; font-size:18pt; font-weight:bold; width:600px; margin:auto;  text-align: center;" >
+			Please enter Check-In and Check-Out dates
+		</div>
+	
+		<div style="width:600px; margin:1em auto;">	
+			
+			<!-- Date Select -->
+			<table class="dateTable">
+				<tr>
+					<th width="50%">Check in Date</th>
+					<th width="50%">Check out Date</th>
+				</tr>
+				<tr>
+					<td><input value="{{ dateFrom }}" name="dateFrom"	class="datepicker dateEntry" type="text"  ></td>
+					<td><input value="{{ dateTo }}"   name="dateTo" 	class="datepicker dateEntry" type="text" ></td>
+				</tr>
+
+			</table>
+			
+		</div>
+		<!-- Select Room Type -->
+		<div style="padding:2em; text-align:center; font-size:16pt;color:white">
+			Select Room Type
+			<select id="typeChoice" name="typeChoice" >
+				{% for t in RoomTypeChoices %}
+				<option >{{ t }}</option>
+				{% endfor %}
+			</select>
+			
+			<!-- locks the select to the current selection -->
+			<script>
+				$("#typeChoice").val("{{ typeChoice }}");
+			</script>
+		</div>
+
+		
+		
+		
+		<div style="text-align:center; padding:2em;">
+			<button name="available"  style=" font-family:ExoBlack;   color:#86CF67; background-color:{{theme_back }};
+			border : 1px solid gray; cursor: pointer; font-size:18pt; padding:1em; " >Check Prices and Availability</button>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<script >
+		$( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+	</script>
+	
+	</form>
+	{% endblock %}
+

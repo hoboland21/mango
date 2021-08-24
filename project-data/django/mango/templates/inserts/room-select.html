@@ -1,0 +1,79 @@
+<style>
+
+
+
+</style>
+
+
+<div class="frame-box">
+
+<h4>Room Assignment</h4>
+<div> {{ rsvn_rooms.count }} of {{ rsvn.rooms }} assigned</div>
+<form method="POST">
+{% csrf_token %}
+	<div class="flex-con">	
+		{% for rms in rsvn_rooms  %}
+		<div style="text-align:center; ">
+			<div><button class="cell-btn" name="room-delete" value="{{ rms.id }}">{{ rms.roominfo.number }}</button></div>
+		</div>	
+		{% endfor %}
+	</div>
+</form>
+</div>
+
+
+<form method="POST">
+{% csrf_token %}
+	<div class="flex-con">		
+		<div  style="width:65%" class="frame-box">
+		<h3>Available</h3>
+			{% for room  in roomlist  %}
+				<hr>
+				{{ room.head }}
+				<br>
+					{% for  item in room.list %}
+						{% if not item.hit %}
+						<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ item.number }}</button>
+						{% endif %}
+					{% endfor %}
+			{% endfor %}
+		</div>
+
+		<div style="width:35%" class="frame-box">
+			<h3>Occupied</h3>
+			{% for room  in roomlist  %}
+				<hr>
+				{{ room.head }}
+				<br>
+				<div class="flex-con">
+					{% for  item in room.list %}
+						{% if item.hit %}
+						<div><button class="occ-btns">{{ item.number  }}</button></div>
+						{% endif %}
+					{% endfor %}
+				</div>	
+
+			{% endfor %}
+		</div>
+
+	</div>
+</form>
+
+
+<!--
+<div>
+{% for key, value in rs1.roomlister.items  %}
+		<h3>{{key}}</h3>
+		{% for r,v in value.items  %}
+		<div>{{ r }}</div>
+
+		{% for x in v  %}
+			{{ x}}
+		{% endfor %}
+
+		{% endfor %}
+		{{rec}}
+
+
+{% endfor %}
+-->

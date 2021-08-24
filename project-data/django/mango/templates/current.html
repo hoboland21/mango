@@ -1,0 +1,270 @@
+{% extends "base-new-bootstrap.html" %}
+
+{% block style   %}
+
+<style>
+	
+
+	#controlPanel {
+		width:200px;
+		margin:auto;
+		padding:0;	
+	}
+	#controlPanel li {
+		text-align:center;
+	}
+	
+	
+
+	#statusGrid  {
+		margin:10px 10px;
+		font-size:10pt;
+/*		border:1px solid green; */
+
+	}
+	#statusGrid  td {
+		padding:2px;
+	}
+	#statusGrid  th {
+		color:black;
+		padding:2px;
+		text-align:left;
+	}
+	
+	
+	#statusGrid  button {
+		padding:3px;
+		width:40px;
+		height:40px;
+	}
+
+	.legendCell{
+		width:30px;
+	}
+	
+	.legend  table{
+			width:450px;
+	}
+	.legend  tr{
+
+			border:1px solid green;
+	}
+	.legend  td{
+			padding:.4em;
+			border:1px solid green;
+	}
+	.headingBox {
+		text-align: center;
+		background-color: white;
+		padding:1em;
+	}
+	#roomstats ul {
+		border:1px solid yellow;
+
+	}
+	#roomstats td {
+		text-align:center;
+	}
+	#roomstats button {
+	/*	width:100%; */
+		padding:.25em;
+	}
+	
+	#rstat {
+
+	}
+	#rstat td{
+		padding:.5em;
+
+	}
+
+	div.subCell {
+		float:left;
+		padding:.25em;
+		width:120px;
+		border:1px solid black;
+	}
+
+	div.subCell > button {
+		width:30px;
+		font-size:6pt;
+	}
+
+
+.ID_FLAG  {
+	border-style: solid;
+	border-top-width:5px;
+	border-top-color:green;
+
+}
+
+.ERROR_FLAG {
+	border-style: solid;
+	border-bottom-width:5px;
+	border-bottom-color:royalblue;
+}
+.BB_FLAG {
+	border-style: solid;
+	border-bottom-width:5px;
+	border-bottom-color:orange;
+}
+
+.OCCUPIED {
+	background-color:red; 
+	color:yellow;
+}
+.DIRTY {
+	background-color:silver; 
+	color:black;
+}
+.SCHED {
+	background-color:yellow; 
+	color:black;
+}
+.OOC {
+	background-color:black; 
+	color:white;
+}
+
+.CLEAN {
+	background-color:white;
+	color:black;
+}
+.BB  {
+	background-color:orange;
+	color:black;
+}
+.ATTN { 
+	background-color:RoyalBlue;
+	color:black;
+ }
+
+.Selected {
+	border-left:6px solid magenta;
+	border-right:6px solid magenta;
+}
+
+</style>
+
+{% endblock %}
+
+{% block mainbox  %}
+<div class="std_div2">
+	<div class="titleBox">
+		<span class="title">{{ tableTitle }}</span>
+	</div>
+
+
+	<form   method='POST'>
+		{% csrf_token %}
+		<div class="headingBox">
+			<span style="font-size:12pt; font-weight:bold; color:brown;" >Admin Control Panel</span>
+			<button style="margin-left:2em;" class="clean-button" name='gridRefresh' >Grid Refresh</button>
+
+		</div>
+	<input type='hidden' name="roomSelect" value="{{ roomSelect }}">
+	</form>
+
+	<table class='legend' align='center' >
+
+	<tr><td class='OCCUPIED legendCell'> </td><td>Occupied</td>
+		<td class='DIRTY legendCell' > </td><td>Dirty</td>
+		<td class='SCHED legendCell'> </td><td>Sched for Cleaning</td>
+		<td class='legendCell'> <button class='ID_FLAG'>000</button></td><td>Room Group Display</td>
+		<td class='legendCell'><button class='ERROR_FLAG' >000</button> </td><td>Checkin/out not in Sync</td></tr>
+	
+	<tr><td class='OOC legendCell'> </td><td>Out of Comission</td>
+		<td class='CLEAN legendCell'> </td><td>Clean and Vacant</td>
+		<td class='legendCell'> <button class='BB_FLAG' >000</button></td><td>Back to Back</td>
+		<td class='legendCell'><button class='Selected'>000</button> </td><td>Selected Room</td>
+		<td class=' legendCell'></td><td></td></tr>
+	
+	</table>
+
+
+<div name="full_container">
+   <div style="width:70%;float:left;">
+	<form method = "POST" >
+	{% csrf_token %}
+			{% if rInfoList %}
+			<table id='statusGrid'>
+				{% autoescape off %}
+				{% for r in rInfoList %}
+					{{ r }}
+				{% endfor %}		
+				{% endautoescape %}
+			</table>
+			{% endif %} 
+	</form>
+	</div>
+
+	<div style="width:28%;float:left">
+	{% if roomInfo %}
+	<form method = "POST" >
+	{% csrf_token %}
+		<table id="roomstats" border="1" width="100%">
+			<tr><td colspan="2" style="text-align:center; background-color:white"><h1> Room {{ roomInfo.number }} Information</h1></td></tr>
+			<tr><td colspan="2" style="text-align:center; background-color:inherit;padding:.5em"><strong>Current Room Status :</strong> 
+				<span class="{{ roomInfo.currentText }}">{{ roomInfo.currentText }}</span> </td></tr>
+{% if perms.rsvn.delete_rsvn %}
+			<tr><td>
+				<button class="OOC" name="changeRoom" value="OOC">Room Out of Commission</button> 
+			</td>
+			
+			<td>
+				<button class="SCHED" name="changeRoom" value="SCHED">Schedule for Cleaning</button> 
+			</td></tr>
+			<tr><td>
+				<button class="CLEAN" name="changeRoom" value="CLEAN">Make Vacant Clean Room</button> 
+			</td>
+			<td>
+				<button class="DIRTY" name="changeRoom" value="DIRTY">Make A Dirty Room</button> 
+			</td></tr>
+{% endif %}
+			<tr><td colspan="2">
+				{% for rObj in roomObjs %}
+				<table id="rstat" style="background-color:white; width:100%">
+					<tr><td><strong>Dates : </strong>{{ rObj.rsvn.dateIn }} - {{ rObj.rsvn.dateOut }}</td></tr>
+					<tr><td><strong>Reservation Status : </strong>{{ rObj.rsvn.status }}</td></tr>
+					<tr><td><a target="roomInspect" href='/rsvn/detail/update/{{rObj.rsvn.id}}'><strong>Name : </strong>{{ rObj.rsvn.firstname }} {{ rObj.rsvn.lastname }}</a> </td></tr>
+					<tr><td>{{ rObj.roomcnt }} of {{ rObj.rsvn.rooms }} Room(s) assigned</td></tr>
+					<tr><td>
+						<div>
+						{% for room in rObj.roomset|dictsort:"roominfo.number"%}
+							<div class="subCell"> <strong>{{ room.roominfo.number }}</strong>
+								<button name="ciButton" value="{{ room.roominfo.number }}" 
+									{% if room.roomstatus == "checkin"%} style="background-color:green" {% endif %} >IN </button>
+								<button  name="coButton" value="{{ room.roominfo.number }}" 
+									{% if room.roomstatus == "checkout"%} style="background-color:royalblue" {% endif%} >OUT</button>
+							</div>
+						{% endfor %}
+						</div>
+					</td></tr>
+				</table>
+				<hr>
+				{% endfor %}
+
+			</td></tr>
+
+		</table>
+		<input type='hidden' name="roomSelect" value="{{ roomSelect }}">
+	</form>
+
+	</div>
+	{% endif %}
+ </div>
+ <div class="clear"></div>
+</div>
+<script>
+        $( "#currentMenu").css("background-color","navajowhite")
+</script>
+
+
+{% endblock %}
+
+
+
+{% block footer  %} {% endblock %}
+
+
+

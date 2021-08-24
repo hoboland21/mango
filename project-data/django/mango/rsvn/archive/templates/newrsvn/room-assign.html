@@ -1,0 +1,43 @@
+
+
+
+
+	
+	<div class='headText'>Room Assignment</div>
+	<div class="titleText" style="text-align:center"> {{ rsvnRec.assigned }} of {{ rsvnRec.rooms }} assigned</div>
+	<div  style="height:340px; overflow-y:scroll">	
+		
+		{% for rms in rsvnRec.roomset|dictsort:"roominfo.number" %}
+		
+		<div style="border:1px solid white; padding:3px; ">
+			<span><button style="font-size:7pt" name="delRoom" value="{{ rms.roominfo.number }}">X</button> </span>
+			<span style="margin:5px; font-size:12pt; font-weight:bold; ">{{ rms.roominfo.number }} </span>
+			<span style="margin:5px; font-size:10pt">{{ rms.roominfo.beds }} Beds</span>
+			<span style="margin:5px; ">
+				<button style="font-size:7pt;width:32px; margin-left:10px; {% if rms.roomstatus == 'checkin' %} background-color:green;  color:white; font-weight:bold;{% endif %}"
+					name="roomInSelect" value="{{ rms.roominfo.number }}">IN</button>
+				<button style="font-size:7pt;width:32px; margin-left:10px; {% if rms.roomstatus == 'checkout' %} background-color:royalblue; color:white; font-weight:bold;{% endif %}"
+					name="roomOutSelect" value="{{ rms.roominfo.number }}">OUT</button>
+			</span>
+		</div>
+		{% endfor %}
+		
+	</div>
+	<div style="padding:5px">
+		<span style="font-size:10pt; font-weight:bold">Global Select</span>
+		<button  style="margin-left:15px;" class="small-button" name="globalIn">IN</button>
+		<button  style="margin-left:15px;" class="small-button" name="globalOut">OUT</button>
+	
+	</div>
+
+
+	{% if not create %}
+		<!-- Here is the room grid -->
+		<div class="RGDiv">
+			<table class="RGTable">
+			{% autoescape off %}
+				 {{ roomgrid }}
+			{% endautoescape %}
+			</table>	
+		</div>
+	{% endif %}	

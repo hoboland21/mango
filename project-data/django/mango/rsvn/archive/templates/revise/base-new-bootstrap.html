@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mango Resort Reservation System</title>
+
+      <link rel="stylesheet" type="text/css" href="/static/global/js/jquery-ui.min.css">
+      <link rel="stylesheet" type="text/css" href="/static/global/js/jquery-ui.css">
+
+      <link rel="stylesheet" type="text/css" href="/static/global/css/jquery-ui-timepicker-addon.css">
+      <link rel="stylesheet" type="text/css" href="/static/global/css/jquery.dataTables.css">
+
+      <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" >
+
+
+      <script src="/static/global/js/external/jquery/jquery.js"></script>
+      <script src="/static/global/js/jquery-ui.min.js"></script>
+      <script src="/static/global/js/jquery-ui-timepicker-addon.js"></script>
+      <script type="text/javascript" language="javascript" src="/static/global/js/jquery.dataTables.js"></script>
+      <script type="text/javascript" language="javascript" src="/static/rsvn/js/clock.js"></script>
+      <script type="text/javascript" language="javascript" src="/static/bootstrap/js/bootstrap.min.js" ></script>
+  </head>
+
+  <style>
+
+  @font-face {
+      font-family: smallCaps;
+      src: url("/static/fonts/Novecentosanswide-Normal.ttf");
+  }
+      @font-face {
+      font-family: OpenRegular;
+      src: url("/static/fonts/OpenSans-Regular.ttf");
+  }
+      
+  
+	@font-face {
+		font-family: OpenSans;
+		src: url("/static/fonts/OpenSans-Regular.ttf"); }
+	
+		
+	  @font-face {
+		font-family: Quicksand;
+		src: url("/static/fonts/Quicksand-Regular.otf"); }
+	
+	  @font-face {
+		font-family: Nova;
+		src: url("/static/fonts/Novecentosanswide-Normal.ttf"); 
+    
+    
+
+    }
+
+  
+
+
+body {
+  background-color:#ebeace;
+}
+
+  .nice-input input {
+    width:100%;
+  }
+  .flex-con {
+
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+      padding:.25em;
+      align-items:align-center;
+  }
+  .wrapper {
+  
+  }
+
+  #sidebar {
+      width: 200px;
+      position: fixed;
+      top: 40px;
+      left: 0;
+      height: 100vh;
+      z-index: 999;
+      background: #7386D5;
+      color: #fff;
+      transition: all 0.3s;
+  }
+  #content {
+
+    position: fixed;
+    height:95%;
+    width:90%;
+    top: 40px;
+    left: 0;
+    margin-left:200px; 
+    overflow-y:auto;
+
+  }
+  #nvbr {
+      width:100vw;
+      position: fixed;
+      height:40px;
+      top: 0px;
+      left: 0;
+      font-family:Nova;
+
+
+  }
+
+	.frame-box {
+  border:1px solid black;
+  padding:.5em; 
+  border-radius:15px;
+  background-color:snow;
+  margin-top:6px;
+  }
+
+		
+  {% block style %}
+
+  {% endblock %}
+  </style>
+
+  <body>
+  <div id="nvbr"> 
+    {% include "revise/inserts/nav-navbar.html" %}
+   
+  </div>
+    <div class="wrapper">
+      <nav id="sidebar">
+        {% include "revise/inserts/nav-sidebar.html" %}
+        {% block sidebar %}
+        {% endblock sidebar %}
+      </nav>
+      <div id="content">
+          <div class="fluid-container"  >
+            {% block mainbox  %}
+            {% endblock mainbox %}  
+          </div>
+      </div>
+    </div>
+
+    <script>
+      $( ".datetimepicker").datetimepicker({ dateFormat: "yy-mm-dd" });
+          $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+          $( ".timepicker" ).timepicker({ });
+      $( document ).tooltip();
+      $( ".button-like").button();
+      $( ".entry-like").button();
+      $(function() {  $( document ).tooltip();  });
+    </script>
+  </body>
+</html>
+

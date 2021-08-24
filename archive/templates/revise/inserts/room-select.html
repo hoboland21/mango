@@ -1,0 +1,111 @@
+<style>
+
+.ravail-btns {
+	width:60px;
+	border-radius:5px;
+	background-color:white;
+	
+}
+
+.ravail-btns:hover {
+	background-color:lightgreen;
+
+}
+.occ-btns {
+	background-color:PeachPuff;
+}
+.occ-btns:hover {
+	
+}
+.head-btns {
+	width:150px;
+}
+.cell-btn {
+	width:80px;
+	font-size:14pt;
+	color:black;
+	background-color:white;
+}
+
+.cell-btn:hover {
+	width:80px;
+	font-size:14pt;
+	color:red;
+	background-color:navajowhite;
+
+}
+
+</style>
+
+
+<div class="frame-box">
+
+<h4>Room Assignment</h4>
+<div> {{ rg1.rsvn_rooms.count }} of {{ rsvn.rooms }} assigned</div>
+<form method="POST">
+{% csrf_token %}
+	<div class="flex-con">	
+		{% for rms in rg1.rsvn_rooms  %}
+		<div style="text-align:center; ">
+			<div><button class="cell-btn" name="room-delete" value="{{ rms.id }}">{{ rms.roominfo.number }}</button></div>
+		</div>	
+		{% endfor %}
+	</div>
+</form>
+</div>
+
+
+<form method="POST">
+{% csrf_token %}
+	<div class="flex-con">		
+		<div  style="width:65%" class="frame-box">
+		<h3>Available</h3>
+			{% for room  in roomlist  %}
+				{% if room.vacant %}
+				<hr>
+				{{ room.head }}
+				<br>
+					{% for  item in room.vacant %}
+						<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ item.number }}</button>
+					{% endfor %}
+				{% endif %}	
+			{% endfor %}
+		</div>
+
+		<div style="width:35%" class="frame-box">
+			<h3>Occupied</h3>
+			{% for room  in roomlist  %}
+				{% if room.occupied %}
+				<hr>
+				{{ room.head }}
+				<br>
+				<div class="flex-con">
+					{% for  item in room.occupied %}
+						<div><button class="occ-btns">{{ item.number  }}</button></div>
+					{% endfor %}
+				</div>	
+				{% endif %}	
+			{% endfor %}
+		</div>
+
+	</div>
+</form>
+
+
+<!--
+<div>
+{% for key, value in rs1.roomlister.items  %}
+		<h3>{{key}}</h3>
+		{% for r,v in value.items  %}
+		<div>{{ r }}</div>
+
+		{% for x in v  %}
+			{{ x}}
+		{% endfor %}
+
+		{% endfor %}
+		{{rec}}
+
+
+{% endfor %}
+-->

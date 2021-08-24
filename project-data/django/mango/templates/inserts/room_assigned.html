@@ -1,0 +1,12 @@
+<div class="frame-box">
+	<div class="flex-con">	
+	  <div> <button class="clr-btn"> Room Assignment {{ rsvn_rooms.count }} of {{ rsvn.rooms }} assigned </button></div>
+
+				{% for rms in rsvn_rooms  %}
+				<div style="text-align:center; ">
+					<div><button class="cell-btn">{{ rms.roominfo.number }}</button></div>
+				</div>	
+				{% endfor %}
+
+	</div>
+</div>

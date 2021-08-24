@@ -1,0 +1,29 @@
+<style>
+.lbl {
+    font-family:Nova;
+    font-size:12pt;
+}
+.ldata {
+    font-family:Nova;
+    font-size:16pt;
+}
+</style>
+
+<div class="frame-box" >
+
+{% if rsvnid != 0 %}
+    <div style="text-align:center">
+        <span class="lbl"> Guest : </span> 
+        <span class="ldata" >{{ rsvn.firstname }} {{ rsvn.lastname }} </span>
+        <span class="lbl"> date In : </span> 
+        <span class="ldata" >{{ rsvn.dateIn }} </span>
+        <span class="lbl"> date Out : </span> 
+        <span class="ldata" >{{ rsvn.dateOut }} </span>
+        <span class="lbl"> Confirm : </span> 
+        <span class="ldata" >{{ rsvn.confirm }} </span>
+    </div>
+
+{% endif %}
+
+
+</div>

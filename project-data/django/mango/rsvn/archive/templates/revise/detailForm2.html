@@ -1,0 +1,175 @@
+{% extends "revise/base-new-bootstrap.html" %}
+
+{% block style   %}
+
+
+<style>
+
+.last {
+	background-color: pink;
+}
+.rsvd {
+	background-color: red;
+}
+
+.mine {
+	background-color: green;
+
+}
+
+.ooc {
+	background-color: black;
+	color : yellow;
+}
+
+.b2b {
+	background-color: orange;
+
+}
+
+.cell-wrapper {
+	width:20%;
+	padding:1em;
+
+}
+.cell-label {
+	font-size:9pt;
+
+}
+.cell-data {
+
+}
+.nice-input input {
+	width:100%;
+}
+.flex-con {
+
+	display:flex;
+	flex-wrap:wrap;
+	flex-direction:row;
+    padding:.25em;
+    align-items:align-center;
+}
+.big_cell {
+	border:1px solid green;
+	padding:1em;
+	margin:.5em;
+	border-radius:10px;
+}
+.blog-head {
+	font-size:9pt;
+	font-style: italic
+}
+.blog-msg {
+	font-size:12pt;
+	font-style:normal;
+
+}
+
+
+.RGDiv 
+{
+	padding:.1em;
+	border:1px solid brown;
+	background-color:inherit;
+	
+	}
+
+.last {
+	background-color: pink;
+}
+.rsvd {
+	background-color: red;
+}
+
+.mine {
+	background-color: green;
+
+}
+
+.ooc {
+	background-color: black;
+	color : yellow;
+}
+
+.b2b {
+	background-color: orange;
+
+}
+
+
+</style>
+
+
+{% endblock %}
+
+{% block sidebar %}
+	{% include "revise/inserts/detail-sidebar.html" %}
+{% endblock %}
+
+
+{% block mainbox  %}
+    <!-- Page Content -->
+
+	<div style="margin-left:200px" class="container">
+		{% include "revise/inserts/rsvn-id-block.html" %}	
+	<div>
+
+<!-- ========== --> 
+	{% if session.panel == 'rsvncard' %}
+		{% include "revise/inserts/rsvncard.html" %}
+
+<!-- ========== --> 
+	{% elif session.panel == 'roomcard' %}
+		{% include "revise/inserts/room-select.html" %}
+<!-- ========== --> 
+	{% elif session.panel == 'servicecard' %}
+		<h1>{{ session.panel }}</h1>
+			{{ServiceForm.as_table }}
+		</table>	
+<!-- ========== --> 
+	{% elif session.panel == 'tourcard' %}
+		<form method="POST">
+			{% csrf_token %}
+		{% if TourForm %}
+		<table>
+			{{ TourForm.as_table }}
+		</table>	
+		
+		{% else %}
+			<h3>+ Add Tour Info </h3>
+		{% endif %}
+		</form>	
+<!-- ========== --> 
+	{% elif session.panel == 'eventcard' %}
+		<form method="POST">
+			{% csrf_token %}
+		{% if EventForm %}
+		<table>
+			{{ EventForm.as_table }}
+		</table>	
+		
+		{% else %}
+			<h3>+ Add Event Info </h3>
+		{% endif %}
+		</form>	
+
+
+<!-- ========== --> 
+	{% elif session.panel == 'searchcard' %}
+		{% include "revise/inserts/searchcard.html" %}
+
+	{% elif session.panel == 'welcomecard' %}
+		{% include "revise/inserts/welcomecard.html" %}
+
+	{% endif %}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+

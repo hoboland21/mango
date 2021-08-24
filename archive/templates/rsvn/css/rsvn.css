@@ -1,0 +1,313 @@
+   body {
+
+		background-color:#FDE5B7;
+        font-size:10pt;
+        font-family:Tahoma, Verdana, Trebuchet MS, sans-serif;
+        font-size: 1em;
+        padding:0;
+        margin:0;
+		font-family: sans-serif;
+	}
+
+    a {
+	      text-decoration: none; 
+        color:black;
+    }
+
+/*
+ *  Main Frame CSS Styles
+ *
+ *
+ */
+ 
+ 
+ 
+ div#container {
+	padding:0;
+}
+
+div#mainbox {
+	margin:auto;
+	width:1800px;
+/*	background-color:gray; */
+/*	border:1px solid green; */
+
+}
+	
+.std_div2 {
+
+        background-image:url('/static/rsvn/img/bg1.png');
+        font-size:10pt;
+        background-size: auto;
+        background-repeat: repeat-x;
+}
+
+
+	
+ /* Center list box */
+
+
+#rLister {
+		margin:10px auto;
+		width:1500px;
+		height:500px;
+		overflow-y: scroll;
+		background-color:beige;
+		font-size:12pt;
+	}
+	
+#rListerTable td {
+	border:1px solid white;
+	margin:2px;
+	padding:5px;
+	
+	}	
+	
+	
+.errorlist li {
+	background-color:red;
+	font-size:6pt;
+}
+
+.clear {
+	clear: both;
+}
+
+
+
+.titleBox {
+	text-align:center;
+	padding:.5em;
+}
+
+.title {
+	color:maroon;
+	font-weight:800;
+	font-size:18pt;
+	
+}
+
+
+
+
+
+
+.menu_button {
+	display:block;
+	text-align:center;
+	text-decoration:none;
+	color:#333333;
+	white-space: normal;
+	background-color:white;
+	width:150px;
+	padding:1px  0 1px;
+	border-radius:4px;
+	font-size:12pt;
+	margin:0;
+
+}
+.menu_button:hover  {
+	background-color:yellow;
+
+}
+
+
+
+.roomButton {
+	text-align: center;
+	background-color:white;
+	width:38px;
+	height:20px;
+	margin:2px;
+	border:0;
+}
+
+
+/* room grid marker colors */
+
+.last {
+	background-color: pink;
+}
+
+.mine {
+	background-color: green;
+
+}
+
+.ooc {
+	background-color: black;
+	color : yellow;
+}
+
+.b2b {
+	background-color: orange;
+
+}
+
+
+.rsvd {
+	background-color: red !important;
+}
+
+.mine {
+	background-color: green;
+
+}
+
+
+.listTable {
+	font-size:85%;
+	margin:0;
+}
+
+.listTable td {
+	font-weight:normal;
+	font-size:12pt;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid black;
+
+
+}
+.listTable th {
+	font-weight:200;
+	font-size:12pt;
+}
+
+
+
+.formList input, select, textarea {
+	padding: 4px;
+	border-style: ridge;
+	border-color: #008000;
+	font-size:90%;
+	text-align: center;
+}
+
+.formList th  {
+	font-size:80%;
+	text-align: right;
+	font-weight:normal;
+
+}
+.formList td  {
+	font-size:90%;
+	font-weight:500;
+	padding:1px !important;
+	margin:0;
+}
+
+
+.gridTable {
+	background-color:#3f3f3f;
+	color:yellow;
+	margin:auto;
+	width:325px;
+
+}
+
+.gridTable th {
+	text-align:center;
+	border-top:2px solid silver;
+}
+
+.gridHead {
+	font-size:11pt;
+	padding :2px;
+	text-align:center;
+	background-color:#FDE5B7;
+	color : black;
+		}
+
+
+.dateText {
+    font-size:12pt;
+    text-align:center;
+    color:#008000;
+    padding:.25em;
+    margin:.25em;
+}
+
+.entry-like {
+    font-size:10pt;
+    padding:3px;
+}
+
+
+
+
+.safety_button {
+background-color:red;
+    color:yellow;
+}
+
+
+.clean-button {
+
+	background-color:snow;
+	padding: .3em 1em ;
+	font-weight:bold;
+	font-size:12pt;
+	color:saddlebrown;
+ 	border:1px solid green;
+ 	border-radius:5px;
+	cursor:pointer;
+	margin-top:6px;
+	margin-bottom:6px;
+
+}
+.clean-label {
+	color:brown;
+	font-weight:600;
+	font-size:12pt;
+	margin-left:20px;
+}
+.small-button {
+	background-color:snow;
+	padding: 3px 10px;
+	font-weight:bold;
+	font-size:10pt;
+	color:saddlebrown;
+ 	border:1px solid green;
+ 	border-radius:5px;
+	cursor:pointer;
+	margin-top:6px;
+	margin-bottom:6px;
+
+
+}
+
+
+
+
+.splitcell {
+	width:100%;
+}
+
+.splitcell td {
+
+	border:1px solid black;
+	text-align:center;
+	border-collapse:collapse;
+}
+.ui-tooltip-content {
+	font-size:8pt;
+
+	}
+
+
+
+	@font-face {
+		font-family: OpenSans;
+		src: url("/static/fonts/OpenSans-Regular.ttf"); }
+	
+		
+	  @font-face {
+		font-family: Quicksand;
+		src: url("/static/fonts/Quicksand-Regular.otf"); }
+	
+	  @font-face {
+		font-family: Nova;
+		src: url("/static/fonts/Novecentosanswide-Normal.ttf"); }
+			
+			

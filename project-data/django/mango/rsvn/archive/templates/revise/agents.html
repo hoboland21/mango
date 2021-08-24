@@ -1,0 +1,141 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+
+<style>
+
+
+.col_left {
+		width:70%;
+		float:left;
+		background-color:#FDE5B7;
+		
+}
+
+.col_right {
+		width:29%;
+		float:left;
+		margin-left:1em;
+	}
+
+.leftjust {
+    text-align:left;
+}
+.centerjust {
+    text-align:center;
+}
+.agent_button {
+    border : 0;
+    background-color:inherit;
+    cursor:pointer;
+    color:royalblue;
+    font-weight:bold;
+}
+
+.agent_table, .agent_table th {
+    border:2px solid green;
+    padding:3px;
+    background-color:NavajoWhite;
+    border-collapse:collapse;
+}
+
+.agent_table td {
+    border:1px solid black;
+    padding-left:3px;
+	font-size:10pt;
+}
+
+</style>
+
+{% endblock %}
+
+{% block mainbox  %}
+<form   method='POST'>
+	{% csrf_token %}
+
+    <div class="std_div" style="padding-top:1em">
+
+        <div style="text-align:center"><h2>Agent Editor</h2></div>
+
+        <div class="col_left">
+        {% if agent_list %}
+        <table class='agent_table' width="100%">
+
+         <tr>
+             <th>Agency</th>
+             <th>Contact Name</th>
+             <th>Telephone</th>
+             <th>Rate Base </td>
+             <th>Fax Number</th>
+             <th>Email Address</th>
+             <th>Notes</th>
+             <th>Delete</th>
+          </tr>
+
+
+         {% for agent in agent_list|dictsort:'agency' %}
+         <tr>
+             <td><button class='agent_button' name="edit" value="{{ agent.id }}" > {{ agent.agency }}</button></td>
+             <td>{{ agent.contact }} </td>
+             <td>{{ agent.telephone }} </td>
+             <td>{{ agent.rate.rateheading.title }} </td>
+             
+             <td>{{ agent.fax }} </td>
+            <td>{{ agent.email}} </td>
+            <td>{{ agent.notes}} </td>
+
+             <td class="centerjust"><button  name="delete"  value="{{ agent.id }}" >X</button></td>
+           </tr>
+
+        {% endfor %}
+        </table>
+        {% endif %}
+
+        </div>
+
+        <div  class="col_right">
+            {% if agent_form %}
+               <table class="agent_table" width="100%">
+                {{ agent_form.as_table }}
+               <tr>
+               	<td>Rate Base Table</td>
+               	<td>
+               		<select id="rateHead" name="rateHead">
+               			{% for rate in rateHeadings %}
+               				<option value="{{ rate.id }}">{{ rate.title}} </option>
+						{% endfor %}
+               		</select>	
+               	</td>
+               </tr>
+			
+			<script>
+				$("#rateHead").val({{currRH}});
+			</script>  
+			 
+                {% if agent.id %}
+                <tr>
+                	<td colspan = "2" ><button class="button-like" name="update" value="{{ agent.id }}" >Update this </button>
+                    	<button class="button-like"  >Finish</button>
+                    </td>
+                </tr>
+
+                {% else %}
+                <tr>
+                	<td colspan = "2" ><button class="button-like" name="add" >Create Agent</button></td>
+                </tr>
+                {% endif %}
+            </table>
+			
+
+            {% endif  %}
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+</form>
+<script>
+    $( "#adminMenu").css("background-color","navajowhite")
+
+</script>
+{% endblock %}

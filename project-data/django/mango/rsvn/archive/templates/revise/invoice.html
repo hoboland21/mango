@@ -1,0 +1,171 @@
+{% extends "revise/base-new.html" %}
+
+{% block style   %}
+
+
+<style>
+	 .acctTable {
+	 
+		 width:1200px;
+		 margin:2em auto; 
+		 background-color:white; 
+		 border:solid black;
+		border-collapse:collapse;
+		font-size:12pt;
+	 }
+
+	.acctTable td,
+	.acctTable th  {
+		height:20px;		
+		border:1px solid black;
+		border-collapse:collapse;
+		font-size:12pt;
+		padding:.3em;
+	
+	}
+	 .innerTable {
+	 
+		 width:400px;
+		 margin:2em ; 
+		 background-color:white; 
+		border:solid black;
+		border-radius:15px;
+		font-size:12pt;
+	 }
+
+	.innerTable td,
+	.innerTable th  {
+		height:20px;		
+		border:0;
+		border-collapse:collapse;
+		font-size:12pt;
+	
+	}
+	.charge li {
+		display:inline; 
+		margin-right:30px;
+		}
+
+</style>
+{% endblock %}
+
+{% block mainbox  %}
+
+<div> {% include  'revise/detailHeader.html' %} </div>
+
+<div class="std_div2">
+
+	<form id="mainForm" method="POST" >
+	{% csrf_token %}
+	<input type='hidden' id="deleteVerify" name="deleteVerify" >
+	<input type='hidden' id="cloneVerify" name="cloneVerify" >
+	<div>
+		<a class="clean-button" style="font-size:12pt; margin-left:20px;" href="/rsvn/detail/update/{{rsvnid}}" >Return To Editor</a>
+	</div>
+	 
+	 <div>
+
+	<form method="POST" >
+
+	<div style="padding:1em; text-align:center; font-size:12pt"> 
+		<p>Rate Table - {{ rateHeading.title }} --  Room Rate - {{ current_name }}</p>
+
+		Select Rate
+		<select id="rateChange" name="rateChange">
+			{% for rate in rateList %} 
+			<option value="{{ rate.id }}">{{ rate.rateName }}</option>
+			{% endfor %}
+		</select>
+		
+		<button name="changeRate" >Change Rate</button>
+	</div>
+	
+	<script >
+		$('#rateChange').val('{{rateAtom.id }}');
+	</script>
+	
+	<table class="acctTable">
+		{% autoescape off %}
+		{% for charge in chargeList %}
+			{{ charge }}
+		{% endfor %}
+		 {% endautoescape %}
+
+	</table>
+	</form>
+	 
+	 </div>
+	
+
+	
+
+	
+
+
+<!-- Delete dialog definition -->
+
+<div id="delVerifyDialog" >
+	<div class="titleText" >Permanent Deletion</div>
+	<div class="titleText">are you sure? </div>
+</div>
+
+<!-- Clone dialog definition -->
+
+<div id="cloneDialog" >
+	<div class="titleText" >Clone a new record.</div>
+	<div class="titleText">are you sure? </div>
+</div>
+
+
+
+<script src="/static/rsvn/js/detail.js"></script>
+
+<script>
+// Dialog for deleting a record
+	
+	 $(function() {
+		$( "#delVerifyDialog" ).dialog({
+		   autoOpen: false, 
+		   modal:true,
+		   buttons: {
+			  OK: function() {
+				  $("#deleteVerify").val("yes")
+				  $("#mainForm").submit();
+				  $(this).dialog("close"); },
+			Cancel: function() 	{$(this).dialog("close"); }
+				  
+		   },
+		   title: "Delete Reservation {{ rsvnid }} ",
+		});
+		$( "#delbutton" ).click(function() {
+		   $( "#delVerifyDialog" ).dialog( "open" );
+		});
+	 });
+
+//  Dialog for duplicating a record 
+	
+	 $(function() {
+		$( "#cloneDialog" ).dialog({
+		   autoOpen: false, 
+		   modal:true,
+		   buttons: {
+			  OK: function() {
+				  $("#cloneVerify").val("yes")
+				  $("#mainForm").submit();
+				  $(this).dialog("close"); },
+			Cancel: function() 	{$(this).dialog("close"); }
+				  
+		   },
+		   title: "Clone this Record {{ rsvnid }} ",
+		});
+		$( "#dupbutton" ).click(function() {
+		   $( "#cloneDialog" ).dialog( "open" );
+		});
+	 });
+
+
+	$( "#invoiceMenu").css("background-color","navajowhite");
+
+
+</script>
+{% endblock %}

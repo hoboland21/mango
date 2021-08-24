@@ -1,0 +1,47 @@
+<h1>Current Status Page</h1>
+
+<div class="flex-con">
+
+	<div class="frame-box" style="width:33%">
+	<h4>Clean</h4>
+
+	{%for cv in currentView %}
+	{{ cv.head}}
+	<hr>
+		{%for rms in cv.list %}
+			{% if rms.current == 0%}
+			<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ rms.number }}</button>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+	</div>
+
+	<div class="frame-box" style="width:33%">
+	<h4>Dirty</h4>
+	{%for cv in currentView %}
+	{{ cv.head}}
+	<hr>
+		{%for rms in cv.list %}
+			{% if rms.current == 1 %}
+			<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ rms.number }}</button>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+	</div>
+	<div class="frame-box" style="width:33%">
+	<h4>Occupied</h4>
+	{%for cv in currentView %}
+	{{ cv.head}}
+	<hr>
+		{%for rms in cv.list %}
+			{% if rms.current == 1 %}
+			<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ rms.number }}</button>
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+	</div>
+
+		
+
+
+</div>
