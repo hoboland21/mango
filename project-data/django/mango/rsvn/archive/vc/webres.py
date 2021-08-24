@@ -56,7 +56,7 @@ class WebMake (VClass) :
 		if self.rsvnid > 0 :
 			return redirect('rsvnupdate', self.rsvnid )
 			
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )
+		return render(self.template_name,self.result, context_instance=RequestContext(request) )
 #--------------------------------------------------------
 	def saveWeb(self) :
 #--------------------------------------------------------

@@ -4,7 +4,7 @@ from django.contrib.auth.views  import logout_then_login
 
 #from django.core.context_processors import csrf
 #from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response, get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -42,7 +42,7 @@ def admin(request) :
 def index(request):
 	result= {}
 #	result.update (csrf(request))
-	return render_to_response('rsvn/index.html',result )
+	return render('rsvn/index.html',result )
 
 #=====================================================================
 def DateRangeSelect(request,span) :
