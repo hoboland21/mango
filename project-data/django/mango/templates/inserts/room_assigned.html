@@ -1,12 +1,53 @@
-<div class="frame-box">
-	<div class="flex-con">	
-	  <div> <button class="clr-btn"> Room Assignment {{ rsvn_rooms.count }} of {{ rsvn.rooms }} assigned </button></div>
+<style>
+	
+	.subcell {
+		height:30 px;
+	}
+	.green-btn {
+		background-color:green;  color:white; font-weight:bold;
+	}
+	.blue-btn {
+		background-color:royalblue; color:white; font-weight:bold;
+	}
+</style>
+<form method="POST">
+	{% csrf_token %}
+	<div class="flex-con" >	
+		 {% for rms in rsvn_rooms  %}
 
-				{% for rms in rsvn_rooms  %}
-				<div style="text-align:center; ">
-					<div><button class="cell-btn">{{ rms.roominfo.number }}</button></div>
-				</div>	
-				{% endfor %}
+		<div class="flex-con" style="border:1px solid grey; background-color:white;padding:5px; border-radius:5px; ">
+			
 
+			{% if session.panel == 'roomcard' %}
+				<div><button class='btnrow' name="room-delete" 
+					value="{{ rms.id }}">X</button> 
+				</div>
+			{% endif %}
+			<div>
+				<button class='btnrow' 
+					style="border:none;font-weight:bold; background-color:inherit ">{{rms.roominfo.number }}
+				</button>
+				<button  class="btnrow" style="border:none; background-color:inherit"> {{ rms.roominfo.beds }} Beds</button> 
+			</div>
+			<div>
+				<button
+				{% if  rms.roomstatus == 'checkin' %}
+					class="btnrow green-btn" 
+				    {% else %}
+					class="btnrow" 
+				{% endif %}
+					name="roomInSelect" value="{{ rms.id }}">IN
+				</button>
+				<button  
+				{% if  rms.roomstatus == 'checkout' %}
+					class="btnrow blue-btn" 
+				    {% else %}
+					class="btnrow" 
+				{% endif %}
+					name="roomOutSelect" value="{{ rms.id }}">OUT
+				</button>
+			</div>
+		</div>
+		{% endfor %}
 	</div>
-</div>
+</form>

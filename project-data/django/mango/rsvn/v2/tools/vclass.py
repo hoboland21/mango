@@ -9,7 +9,7 @@ from rsvn.views import *
 from datetime import time, date
 
 #from rsvn.vctools.tools import *
-from rsvn.v2.tools.newGrid import *
+
 
 #=====================================================================
 class RClass (View)	 :
@@ -34,6 +34,15 @@ class RClass (View)	 :
 		self.main()
 		return render(self.request,self.template_name,self.result)
 
+
+	# ---------------
+	def scanPOST(self,vlist) :
+	# ---------------
+		for v in vlist :
+			if v in self.request.POST :
+				return True	
+		return False		
+
 	#============================
 	def _init(self):
 	#============================
@@ -46,11 +55,18 @@ class RClass (View)	 :
 			"rsvnid"	:0,
 			"dateStart"	:self.today,
 			"dateEnd"	:self.tomorrow,
+			"dateSelect" : self.today,
 			'panel'		:'welcomecard' }
+
+
+
 
 		for k,v in dataset.items() :
 			if k not in self.request.session :
-					self.request.session[k] = v
+				self.request.session[k] = v
+
+#		self.request.session["dateStart"] = self.today
+#		self.request.session["dateEnd"] =self.tomorrow
 
 		# if we are bringing an rsvnid in through post push to session
 		if "rsvnid" in self.request.POST :
@@ -62,11 +78,15 @@ class RClass (View)	 :
 				# session update 
 				self.request.session["rsvnid"]=rsvnid
 
+		for k in dataset :
+			if k in self.request.POST :
+				self.request.session[k] = self.request.POST[k]
+
 		# set self rsvn and load the reservation		
 		self.request.session["rsvnid"] = int(self.request.session["rsvnid"])
 		# any changesto rsvn id automatically gives rsvncard
-		if self.change:
-			self.request.session["panel"] = "rsvncard"
+#		if self.change:
+#			self.request.session["panel"] = "rsvncard"
 
 		# fix rsvnid
 		self.rsvnid = self.request.session["rsvnid"]
@@ -75,6 +95,12 @@ class RClass (View)	 :
 		self.rsvn = Rsvn()
 		if self.rsvnid :
 			self.rsvn = Rsvn.objects.get(id=self.rsvnid)
+
+
+
+
+
+
 
 
 

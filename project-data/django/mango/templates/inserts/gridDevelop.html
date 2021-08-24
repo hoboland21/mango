@@ -1,0 +1,96 @@
+<style type="text/css">
+.grid_button {
+	background-color: inherit;
+	border:none;
+}	
+.grid_table {
+	width:100%;
+}
+.grid_table th {
+	font-size:14pt;
+	background-color: silver;
+}
+.grid_table td, th {
+	padding:0;
+	border:1px solid silver;
+}
+.xylabels {
+	background-color: silver;
+	font-size:9pt;
+	font-weight:bold; 
+	text-align:center
+}
+
+
+</style>
+
+
+<div  class="frame-box" style="padding:1em">
+
+
+<form method="POST">
+	{% csrf_token %}
+
+	<div style="border-top:1px solid green"> 
+		{% include 'inserts/newdateSelect.html' %}
+	</div>
+	
+</form>
+
+
+<form method="POST">
+	{% csrf_token %}
+<table class="grid_table">
+
+		{% for r in newGridView.rimap.room_map %}
+
+
+
+	{% if r.head in newGridView.header_list %}
+	<tr><th>{{ r.head }}</th>
+
+		{% for x in newGridView.seq %}
+			{% if x.1 == newGridView.todayMark %}
+				<td class="xylabels" style="background-color:pink">
+					<button class="date-btns" value="{{x.0}}" name="dateGo" >{{ x.1 }}
+					</button>
+				</td>
+
+			{% else %}    
+				<td class="xylabels">		
+					<button class="date-btns" value="{{x.0}}" name="dateGo" >{{ x.1 }}
+					</button>
+				</td>
+			
+			{% endif %}
+
+		{% endfor %}
+	</tr>
+	{% else %}
+	<tr><th colspan=25 >{{ r.head }}</th></tr>
+
+	{% endif %}
+
+
+
+
+
+
+	{% for rl in r.list %}
+	<tr>
+		<td class="xylabels">{{ rl.number }}</td>
+	 {% for c in rl.cells %}
+	 	{% if c %}
+		<td style="background-color:{{c.0.gridcolor}}">
+			<button name="rsvn_select" value="{{c.0.rsvn}}" title="{{c.0.title}}" class="grid_button">O</button></td>
+		{% else %}
+		<td></td>
+		{% endif %}
+	{% endfor %}
+	</tr>
+	{% endfor %}
+{% endfor %} 
+</table>
+
+</form>
+</div>

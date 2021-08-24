@@ -1,0 +1,275 @@
+body {
+
+	background-color : #d5d5d5;
+	font-size:10pt;
+	font-family:Tahoma, Verdana, Trebuchet MS, sans-serif;
+	font-size: 1em;
+	padding:0;
+	margin:0;
+}
+
+a {
+	text-decoration: none;
+	color:#0000FF;
+}
+
+
+div#container {
+	
+	padding:0;
+}
+
+
+div#logobox {
+	border-bottom: 1px dotted black;
+}
+
+div#mainbox {
+	margin:auto;
+	width:1240px;
+}
+
+
+
+.errorlist li {
+	background-color:red;
+	font-size:6pt;
+}
+
+.clear {
+	clear: both;
+}
+
+
+.menu_button {
+	display:block;
+	text-align:center;
+	text-decoration:none;
+	color:#333333;
+	white-space: normal;
+	background-color:white;
+	width:150px;
+	padding:1px  0 1px 0;
+	border-radius:4px;
+	font-size:12pt;
+	margin:0;
+
+}
+.menu_button:hover  {
+	background-color:yellow;
+	
+}
+
+
+
+.roomButton {
+	text-align: center;
+	background-color:white;
+	width:38px;
+	height:20px;
+	margin:2px;
+	border:0;
+}
+
+.last {
+	background-color: pink;
+
+
+}
+.rsvd {
+	background-color: red;
+}   
+
+.mine {
+	background-color: green;
+	
+}   
+
+.b2b {
+	background-color: orange;
+
+}
+
+
+
+.listTable {
+	font-size:85%;
+	margin:0;
+}
+
+.listTable td {
+	font-weight:normal;
+	font-size:12pt;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid black;      
+	
+	
+}
+.listTable th {
+	font-weight:200;
+	font-size:12pt;
+}
+
+
+
+.formList input, select, textarea {
+	padding: 4px;
+	border-style: ridge;
+	border-color: #008000;
+	font-size:90%; 
+	text-align: center;
+}   
+
+.formList th  {
+	font-size:80%;
+	text-align: right;
+	font-weight:normal;
+	
+}
+.formList td  {
+	font-size:90%;
+	font-weight:500;
+	padding:1px !important;
+	margin:0;       
+}
+
+
+.gridTable {
+	width:345px;
+	text-align:left;
+	background-color:#3f3f3f;
+	color:yellow;
+	margin:auto;
+	
+}
+
+
+
+
+.gridTable th {
+	text-align:center;
+	border-top:2px solid orange;
+}
+
+.gridHead {
+	font-size:11pt;
+	padding :2px;
+	text-align:center;
+	background-color:#FDE5B7;
+	color : black;
+		}
+
+    
+.dateText {
+    font-size:12pt;
+    text-align:center;
+    color:#008000;
+    padding:.25em;
+    margin:.25em;
+}
+
+.entry-like {
+    font-size:10pt;
+    padding:3px;
+}
+
+#tabs div {
+	    background-color : #FDE5B7;
+        background-image:url('/static/rsvn/img/bg1.png');
+        font-size:10pt;
+        background-size: auto;
+        background-repeat: repeat-x;
+}
+#tabs2 div {
+	        background-color : #FDE5B7;
+        background-image:url('/static/rsvn/img/bg1.png');
+        font-size:10pt;
+        background-size: auto;
+        background-repeat: repeat-x;
+}
+
+
+
+
+
+.stdFrame  {
+		height: 810px;
+		overflow:scroll;
+}
+#mainmenu  {
+	font-size:9pt;
+}
+
+#mainmenu td {
+	width:200px;
+	padding: 6px;
+	text-align:center;
+}
+
+#mainmenu a {
+	color:black;
+}
+	
+#mainmenu a:hover {
+	color:red;
+}
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.RGDiv 
+{
+	padding:.1em;
+	border:1px solid brown;
+	background-color:inherit;
+	
+	}
+
+.last {
+	background-color: pink;
+}
+.rsvd {
+	background-color: red;
+}
+
+.mine {
+	background-color: green;
+
+}
+
+.ooc {
+	background-color: black;
+	color : yellow;
+}
+
+.b2b {
+	background-color: orange;
+
+}

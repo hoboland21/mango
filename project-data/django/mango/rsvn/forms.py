@@ -105,12 +105,7 @@ class TourForm(ModelForm) :
 class SchemeForm(ModelForm) :
 	class Meta:
 		model= Scheme
-		fields = '__all__'
 		exclude = ['rsvn','rsvnColor','extraColor']
-
-
-
-
 #---------------------------------------------------------
 class RoomForm(ModelForm) :
 	class Meta:

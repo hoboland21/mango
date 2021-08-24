@@ -1,8 +1,104 @@
 from rsvn.v2.tools.tools import *
-from rsvn.v2.tools.vclass import VClass
+from rsvn.v2.tools.roomStats import *
+from rsvn.lists import *
 from time import clock
 from datetime import date,timedelta,datetime 
 from copy import deepcopy
+
+class newCurrent(object) :
+
+	#-------------------
+	def __init__(self,request) :
+	#-------------------
+		self.request = request
+		self.scan_current()
+		pass
+
+
+	#-------------------
+	def build_snapshot(self) :	
+	#-------------------
+		roomMapper =  RoomMapper()
+		roomMapper.build_tree()
+		self.room_map = roomMapper.room_map
+
+	#-------------------
+	def verify_select(self) :	
+	#-------------------
+		if "roominfo-select" in self.request.POST :
+			try: 
+				ri = RoomInfo.objects.get(id=int(self.request.POST['roominfo-select']))
+				cv = self.request.POST["cell-value"] 
+				ri.current= cv
+				ri.save()
+			except: 
+				print("weird values no love")	
+
+
+	#-------------------
+	def today_rooms(self) :
+	#-------------------
+		dateStart 	=  date.today().isoformat()
+		dateEnd  	=  (date.today() + timedelta(days=1)).isoformat()
+		return  rooms_in_span(dateStart,dateEnd) 
+
+	#-------------------
+	def scan_current(self) :
+	#-------------------
+		rooms = self.today_rooms()
+		for r in rooms :
+			ri = RoomInfo.objects.get(id=r.roominfo.id)
+			ri.current = 1  # set rooms to occupied
+			ri.save()
+		for ri in RoomInfo.objects.all() :
+			if ri.current == 1 :
+				if not rooms.filter(roominfo=ri) :
+					ri.current = 2 # set room to dirty
+					ri.save()
+
+	#-------------------
+	def room_snapshot(self):
+	#-------------------
+		rooms = self.today_rooms()
+		self.build_snapshot()
+		for h in self.room_map :
+			for ri in h['list'] :
+				ri.style = roomStateDict[ri.current]
+				roomfound = rooms.filter(roominfo=ri)
+				if roomfound : 
+					setattr(ri,"roomcount",len(roomfound))
+					setattr(ri,"roomfound",roomfound)
+		return self.room_map
+
+
+
+#style roomcount roomfound
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+'''			r
+
+
 	#------------------
 	def roomscan(self):
 	#------------------
@@ -36,7 +132,7 @@ ATTN		= 6
 # This is our housekeeping grid class
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 class currentView(object) :
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	#-------------------------------------------
 	#-------------------------------------------
 	def __init__(self) :
@@ -77,7 +173,7 @@ class currentView(object) :
 		# get room objects for today time frame
 		# rObjs give us room information edited by staff
 		self.rInfoAll = RoomInfo.objects.all()
-
+ 
 
 
 		self.rObjs = Room.objects.filter(rsvn__dateIn__lte = self.today,  rsvn__dateOut__gte = self.today ).exclude(
@@ -234,4 +330,4 @@ class currentView(object) :
 			rInfo.save()
 
 		
-	
+'''	

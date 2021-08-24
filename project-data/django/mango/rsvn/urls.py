@@ -8,17 +8,6 @@ urlpatterns = [
 ]
 
 
-
-
-
-
-
-
-
-
-
-
-
 #	url(r'^current/$',current.currentView.as_view(), name='current'),
 
 #	url(r'^detail/list/(?P<rsvnid>\d+)/$',detailList.RsvnList.as_view(), name='rsvnlist'),

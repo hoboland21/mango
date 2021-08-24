@@ -1,0 +1,202 @@
+
+body {
+  background-color:#ebeace;
+}
+
+  .nice-input input {
+    width:100%;
+  }
+  .flex-con {
+
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+      padding:.25em;
+      align-items:align-center;
+  }
+  .wrapper {
+  
+  }
+
+  #sidebar {
+      width: 200px;
+      position: fixed;
+      top: 40px;
+      left: 0;
+      height: 100vh;
+      z-index: 999;
+      background: #7386D5;
+      color: #fff;
+      transition: all 0.3s;
+  }
+  #content {
+
+    position: fixed;
+    height:95%;
+    width:90%;
+    top: 40px;
+    left: 0;
+    margin-left:200px; 
+    overflow-y:auto;
+
+  }
+  #nvbr {
+      width:100vw;
+      position: fixed;
+      height:40px;
+      top: 0px;
+      left: 0;
+      font-family:Nova;
+
+
+  }
+
+	.frame-box {
+  border:1px solid black;
+  padding:.5em; 
+  border-radius:15px;
+  background-color:snow;
+  margin-top:6px;
+  }
+.ravail-btns {
+  width:60px;
+  border-radius:5px;
+  background-color:white;
+  
+}
+
+.ravail-btns:hover {
+  background-color:lightgreen;
+
+}
+.occ-btns {
+  background-color:PeachPuff;
+}
+
+.my-btns {
+  background-color:seagreen;
+}
+
+.date-btns {
+  border:none;
+  padding:0;
+  background-color:inherit;
+}
+
+
+.head-btns {
+  width:150px;
+}
+.cell-btn {
+  width:80px;
+  font-size:14pt;
+  color:black;
+  background-color:white;
+}
+
+.cell-btn:hover {
+  width:80px;
+  font-size:14pt;
+  color:red;
+  background-color:navajowhite;
+
+}
+
+
+
+
+.last {
+  background-color: pink;
+}
+.rsvd {
+  background-color: red;
+}
+
+.mine {
+  background-color: green;
+
+}
+
+.ooc {
+  background-color: black;
+  color : yellow;
+}
+
+.b2b {
+  background-color: orange;
+
+}
+
+
+.CLEAN   {
+
+  background-color: #39b400;
+}
+.OCCUPIED {
+  background-color: #ff4d4d;
+
+}
+.DIRTY   {
+  background-color: grey;
+
+}
+.SCHED   {
+  background-color: yellow;
+
+}
+.OOC     {
+  background-color: #740069;
+}
+
+}
+.BB    {
+  background-color: orange;
+
+}
+.ATTN   {
+  background-color: maroon;
+
+}
+
+
+
+
+
+.cell-wrapper {
+  width:20%;
+  padding:1em;
+
+}
+.cell-label {
+  font-size:9pt;
+
+}
+.cell-data {
+
+}
+.nice-input input {
+  width:100%;
+}
+.flex-con {
+
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction:row;
+    padding:.25em;
+    align-items:align-center;
+}
+.big_cell {
+  border:1px solid green;
+  padding:1em;
+  margin:.5em;
+  border-radius:10px;
+}
+.blog-head {
+  font-size:9pt;
+  font-style: italic
+}
+.blog-msg {
+  font-size:12pt;
+  font-style:normal;
+
+}

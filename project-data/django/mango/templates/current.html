@@ -205,7 +205,9 @@
 		<table id="roomstats" border="1" width="100%">
 			<tr><td colspan="2" style="text-align:center; background-color:white"><h1> Room {{ roomInfo.number }} Information</h1></td></tr>
 			<tr><td colspan="2" style="text-align:center; background-color:inherit;padding:.5em"><strong>Current Room Status :</strong> 
-				<span class="{{ roomInfo.currentText }}">{{ roomInfo.currentText }}</span> </td></tr>
+				<span class="{{ roomInfo.currentText }}">{{ roomInfo.currentText }}</span> 
+			</td>
+		</tr>
 {% if perms.rsvn.delete_rsvn %}
 			<tr><td>
 				<button class="OOC" name="changeRoom" value="OOC">Room Out of Commission</button> 

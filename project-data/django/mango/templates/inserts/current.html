@@ -1,47 +1,77 @@
-<h1>Current Status Page</h1>
+<style type="text/css">
+	 
+	.curr-btn {
+		width:15%;
+		border:1px solid navajowhite;
+	}
+	.cell-select {
+		font-size:9pt;
+		background-color:inherit;
+		border:none;
+	}
+	.cell-number {
+		font-size:14pt;
+		background-color:inherit;
+		border:none;
+	}
+	.cell-flex {
+		display:flex;
+		 flex-direction:row;
+	}
+</style>
 
-<div class="flex-con">
-
-	<div class="frame-box" style="width:33%">
-	<h4>Clean</h4>
-
-	{%for cv in currentView %}
-	{{ cv.head}}
-	<hr>
-		{%for rms in cv.list %}
-			{% if rms.current == 0%}
-			<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ rms.number }}</button>
-			{% endif %}
-		{% endfor %}
-	{% endfor %}
-	</div>
-
-	<div class="frame-box" style="width:33%">
-	<h4>Dirty</h4>
-	{%for cv in currentView %}
-	{{ cv.head}}
-	<hr>
-		{%for rms in cv.list %}
-			{% if rms.current == 1 %}
-			<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ rms.number }}</button>
-			{% endif %}
-		{% endfor %}
-	{% endfor %}
-	</div>
-	<div class="frame-box" style="width:33%">
-	<h4>Occupied</h4>
-	{%for cv in currentView %}
-	{{ cv.head}}
-	<hr>
-		{%for rms in cv.list %}
-			{% if rms.current == 1 %}
-			<button class="ravail-btns" name="room-select" value="{{item.id}}">{{ rms.number }}</button>
-			{% endif %}
-		{% endfor %}
-	{% endfor %}
-	</div>
-
+	<div class="frame-box" >
+<div style="text-align: center;"><h4>Current Status Page</h4></div>
+*note To change values select from the dropdown boxes and click the number to confirm
+	{%for snap in newCurrent.room_snapshot %}
+	
+		<hr>
+		<h3>{{ snap.head}}</h3>
+		<br>
+		<div class="flex-con">
+			{%for ri in snap.list %}
 		
 
+				<div class="curr-btn {{ ri.style }} ">
+					<form method="POST">
+						{% csrf_token %}
+					<div class="cell-flex">
+						<div>
+							<button class="cell-number" name="roominfo-select" value="{{ri.id}}">
+								{{ ri.number }}</button>
+							</div>
+						<div>
+							<select name="cell-value"  class="form-control cell-select">
+								<option 
+									{% if ri.current == 0 %} selected {% endif %}
+									value=0>Clean</option>
+								<option 
+									{% if ri.current == 1 %} selected {% endif %}
+									value=1>Occupied</option>
+								<option 
+									{% if ri.current == 2 %} selected {% endif %}
+									value=2>Dirty</option>
+								<option 
+									{% if ri.current == 3 %} selected {% endif %}
+									value=3>Sched</option>
+								<option 
+									{% if ri.current == 4 %} selected {% endif %}
+									value=4>OOC</option>
+								<option 
+									{% if ri.current == 5 %} selected {% endif %}
+									value=5>B2B</option>
+								<option 
+									{% if ri.current == 6 %} selected {% endif %}
+									value=6>Attention</option>
 
-</div>
+							</select>
+						</div>
+					</div>
+					</form>
+
+				</div>	
+
+			{% endfor %}
+		</div>
+		{% endfor %}
+	</div>

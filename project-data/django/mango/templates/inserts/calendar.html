@@ -1,1 +1,262 @@
-<h1>Calendar Card</h1>
+<style>
+
+	
+.bigCell {
+
+
+    border: 3px solid rgba(50,50,100, .2);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+
+	border-bottom-right-radius:20px; 
+	/* border-bottom-left-radius:20px; */
+	margin-bottom:1em;
+	background-color: #EEEEEE;
+
+}
+
+.bigCellHead {
+	font-weight:bold;
+	font-family: smallCaps;
+
+	padding:2px;
+}
+
+.bigCellWrap {
+	padding:.3em;
+}
+
+.bigCellStripe {
+	height:10px;
+
+
+}
+
+.cell_head {
+	float:left;
+	font-family:smallCaps;
+}
+
+
+#main_cell {
+	background-color: beige;
+	padding:1em;
+}
+
+h3 {
+	font-size:10pt;
+}
+
+.ui-accordion {
+	font-size:10pt;
+
+}
+
+.ui-accordion-header {
+	font-size:12pt;
+}
+
+
+.ui-accordion-content {
+
+}
+
+
+.capLabels {
+
+	font-family: smallCaps;
+	font-size:10pt;
+}
+
+.smallCaps {
+	font-family:smallCaps;
+	font-weight:bold;
+
+}
+.sdiv {
+	float:left;
+
+	padding:5px;
+
+	width:200px;
+
+}
+.sdivCell {
+	width:30px;
+	padding:5px;
+	float:left;
+}
+
+.inhouse {
+	background-color:rgba(119,63,7,.5);
+}
+.checkin {
+	background-color:rgba(34,139,34,.5);
+}
+.checkout {
+	background-color:rgba(205,1,33,.5);
+}
+.available {
+	background-color:white;
+
+}
+.calbtns {
+  width:60px;
+  border-radius:5px;
+  
+}
+.rsvnbtn {
+	width:100%;
+	background-color: inherit;
+	border:none;
+}
+
+.rsvnbtn div {
+	text-align:left;
+	padding:3px;
+
+}
+
+</style>
+
+
+
+<form method="POST" id="calForm">
+	
+{% csrf_token %}
+
+<div style="background-color:white; border-top:1px solid black; border-bottom:1px solid black;">	
+
+		<label  class="clean-label" for="srchdate">Date Select</label>
+		<input  class="clean-button datepicker" name='dateSelect' id="srchdate" type='text' 		
+										value="{{ session.dateSelect }}"class='datepicker' >
+		<button class="clean-button" name="dateMinus" > << </button>			
+		<button class="clean-button" name="datePlus" > >> </button>			
+		<button class="clean-button" name="dateGo" > Go </button>
+	
+		<span style=" font-size:20pt;margin-left:40px; color:maroon"> {{ caldate|date:"l F d, Y" }} </span>
+		<span style=" font-size:16pt;text-align:center; color:#949494; margin-left:40px;"> {{ dateMark }} </span>
+</div>
+
+
+
+<div class="row">
+	<div class="col-md-7">
+		
+
+
+	<!--   Event  	 -->
+
+		<div class='bigCell'> 
+			<div class='bigCellStripe'style="background-color:rgba(16,52,203,.5)" > </div>
+			<div class='bigCellHead'>Events </div>
+		</div>	
+
+
+		<!--   In House Cell 	 -->
+
+			 
+		<div class='bigCell'> 
+			<div class='bigCellStripe'style="background-color:rgba(119,63,7,.5)" > </div>
+
+			<div class="bigCellHead" >In House Guests</div>
+				
+				{% for r,v in calInfo.currHouseRsvn.items %}
+					<div>
+						<button class="rsvnbtn" name="rsvn_select" value="{{ v.0.rsvn.id }}">
+						 <div>{{ v.0.rsvn.firstname }} {{ v.0.rsvn.lastname }} 
+							Room:
+						{% for i in v %}
+							 {{ i.roominfo.number}}, 
+						{% endfor %}
+						</div>						 
+					</button>
+					 </div>
+
+
+				{% endfor %}
+		</div>	
+
+
+
+			<!--   Checkin In Cell 	 -->
+		<div class='bigCell'> 
+			<div class='bigCellStripe' style="background-color:rgba(34,139,34,.5)" > </div>
+			<div class='bigCellHead' >Check Ins</div>	
+				{% for r,v in calInfo.currCheckinRsvn.items %}
+					<div>
+						<button name="rsvn_select" value="{{ v.0.rsvn.id }}">
+						 {{ v.0.rsvn.firstname }} {{ v.0.rsvn.lastname }} 
+							Room:
+						{% for i in v %}
+							 {{ i.roominfo.number}}, 
+						{% endfor %}	
+						 </button>
+					 </div>
+
+
+				{% endfor %}
+
+		</div>
+
+			<!--   Checkout Cells 	 -->
+
+		<div class='bigCell'> 
+			<div class='bigCellStripe' style="background-color:rgba(205,1,33,.5)" > </div>
+			<div class='bigCellHead' >Check Outs</div>	
+				{% for r,v in calInfo.currCheckoutRsvn.items %}
+					<div>
+						<button name="rsvn_select" value="{{ v.0.rsvn.id }}">
+						 {{ v.0.rsvn.firstname }} {{ v.0.rsvn.lastname }} 
+							Room:
+						{% for i in v %}
+							 {{ i.roominfo.number}}, 
+						{% endfor %}	
+						 </button>
+					 </div>
+				{% endfor %}
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="frame-box">
+		{% for ct in caltest %}
+			<br>
+				{{ct.head}}
+			<br>
+			<div class="flex-con">
+				{% for ri in ct.list %}
+					<div>
+
+						{% if ri.inhouse %}
+						    
+						<button class="calbtns inhouse" name="rsvn_select" value="{{ ri.rsvn }}" >{{ri.number}}
+
+						{% elif  ri.checkin %}
+						<button class="calbtns checkin" name="rsvn_select" value="{{ ri.rsvn }}" >{{ri.number}}
+						{% elif  ri.checkout %}
+						<button class="calbtns checkout" name="rsvn_select" value="{{ ri.rsvn }}" >{{ri.number}}
+						{% else %}
+						<button>{{ri.number}}
+						{% endif %}
+						</button>
+					</div>
+				{% endfor %}
+			</div>	
+
+		{% endfor %}
+		</div>
+	</div>
+</div>
+</form>	
+	<script>
+		$("#srchdate").change(
+			function() {
+				$("#calForm").submit()
+			}
+		)
+	</script>
+
+
+
+
+

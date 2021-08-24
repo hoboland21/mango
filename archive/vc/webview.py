@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, get_object_or_404, render
+from django.shortcuts import render, get_object_or_404, render
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect, HttpResponse
@@ -76,7 +76,7 @@ class webThanks(UVClass):
 		if self.escape == 1 :
 			return redirect ('http://themangoresort.com:88')
 				
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )	
+		return render(self.template_name,self.result, context_instance=RequestContext(request) )	
 	#-----------------------------------------
 	def main(self):
 	#-----------------------------------------
@@ -111,7 +111,7 @@ class webView(UVClass):
 		if self.escape == 1 :
 			return redirect ('webthanks', self.webRsvn.id)
 
-		return render_to_response(self.template_name,self.result, context_instance=RequestContext(request) )	
+		return render(self.template_name,self.result, context_instance=RequestContext(request) )	
 	
 	
 	

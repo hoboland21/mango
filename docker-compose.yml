@@ -10,22 +10,15 @@ services:
       - mango-mysql-db:/var/lib/mysql
       - ./project-data:/usr/src/app/
 
-    ports:
-      - "2306:3306"
+#    ports:
+#      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: mariadb
-#-------------------------------------
+    networks:
+      mango_net:
+        ipv4_address: 172.29.1.2
 
-  angular:
-    build:
-      context: angular
-    volumes:
-      - ./project-data:/usr/src/app/
-    entrypoint: 
-      - /bin/sh
-      - /usr/src/app/angular/startup.sh
-        
- #-------------------------------------
+#-------------------------------------
 
   django:
 
@@ -45,44 +38,33 @@ services:
 
     depends_on:
       - mysql
-      - angular
-
+      
+    networks:
+      mango_net:
+        ipv4_address: 172.29.1.4
 
 #-------------------------------------
 
-        #nginx
-        #   build:
-        #      context: nginx
-        #    volumes:
-        #      - ./project-data:/usr/src/app/
-        #   ports:
-        #     - "80:80"
-        #   depends_on:
-        #     - django
+  nginx:
+    build:
+      context: nginx
+    volumes:
+      - ./project-data:/usr/src/app/
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+    networks:
+      mango_net:
+        ipv4_address: 172.29.1.6
 #-------------------------------------
 
-#  sentry:
-#    build:
-#      context: sentry
- #   volumes:
-  #    - ./project-data:/usr/src/app/
-#    entrypoint:
-#      - /bin/sh
-#      - /usr/src/app/sentry/startup.sh
-#    depends_on:
-#      - mysql
-#    networks:
-#      mcsap_net:
-#        ipv4_address: 172.28.1.7
-#-------------------------------------
-#  mongo:
-#    image: mongo
-#    restart:  always
-#    networks:
-#      mcsap_net:
-#        ipv4_address: 172.28.1.8
-
-
+networks:
+  mango_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.0.0/16
 volumes:
   mango-mysql-db: 
     external : yes    

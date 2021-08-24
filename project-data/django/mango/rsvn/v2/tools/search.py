@@ -12,8 +12,12 @@ def search_query(post) :
 		result[s] = ""
 	if "query" in post and len(post['query']):
 		q = post['query']
-		qlist = Rsvn.objects.filter(Q(lastname__icontains=q)|Q(firstname__icontains=q)
-			).order_by('-dateIn')
+		
+		if q.isdigit() :
+			qlist = Rsvn.objects.filter(confirm__icontains=q).order_by('-dateIn')
+		else:	
+			qlist = Rsvn.objects.filter(Q(lastname__icontains=q)|Q(firstname__icontains=q)
+				).order_by('-dateIn')
 
 		if not "include_cancel" in post :
 			qlist = qlist.exclude(status="cancel") 

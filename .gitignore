@@ -1,0 +1,5 @@
+node_modules
+project-data/django/mcsap/static/ang/dashboard/*
+.pyc
+migrations
+__pycache__

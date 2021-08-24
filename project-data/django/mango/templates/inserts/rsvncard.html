@@ -19,8 +19,9 @@
 
 						{% if session.rsvnid %}
 						<div><button name="update-rsvn">Update Record</button></div>
-						<div><button name="delete-rsvn">Delete Record</button></div>
-						
+						{% if user.username == "ioulia" or  user.username == "hobo" %}
+						<div style="margin-left:10em"><button name="delete-rsvn">Delete Record</button></div>
+						{% endif %}
 						
 						{% else %}
 						<div><button name="create-rsvn">Create Record</button></div>
@@ -31,25 +32,24 @@
 			</div>
 		</div>
 		{% if session.rsvnid %}
-		{% include "inserts/room_assigned.html" %}
 
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-4">
 			<!-- Color scheme -->
 					<form method="POST">
 					{% csrf_token %}
 						<div class="frame-box" style='border-width:3px;border-color:{{schemecolor}}'>
 							<h4>Color Scheme</h4>
-								<table >
+				
+								<table>
 									{{ SchemeForm.as_table }}
-								
 								</table>
 							<button name="update-scheme">Update Scheme</button>
 						</div>
 					</form>
 				
 				</div>
-				<div class="col-md-7">
+				<div class="col-md-4">
 					<div class="frame-box">
 						<h4>Blog</h4>
 						<form method="POST">
@@ -61,6 +61,8 @@
 						
 						
 						</form>
+
+
 						
 						<div style="overflow-y:auto; height:100px;">
 							{% for brec in blogList %}
@@ -69,6 +71,16 @@
 			
 							{% endfor %}	
 						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="frame-box">
+						<form method="POST">
+							{% csrf_token %}
+						<h4><button  style="background-color:inherit" name="panel"  
+							value="roomcard" >Rooms</button></h4>
+						</form>
+						{% include "inserts/room_assigned.html" %}
 					</div>
 				</div>
 			{% endif %}

@@ -38,9 +38,9 @@
             {% endif %}
         >
         
-            <td><button class="table-button" name="rsvnid" value="{{ rv.id }}">{{ rv.confirm }}</button></td>
+            <td><button class="table-button" name="rsvn_select" value="{{ rv.id }}">{{ rv.confirm }}</button></td>
             <td>{{ rv.status}}</td>
-            <td><button class="table-button" name="rsvnid" value="{{ rv.id }}">{{ rv.firstname }} {{ rv.lastname }}</button></td>
+            <td><button class="table-button" name="rsvn_select" value="{{ rv.id }}">{{ rv.firstname }} {{ rv.lastname }}</button></td>
             <td>{{ rv.dateIn|date:"m/d/y" }}</td>
             <td>{{ rv.dateOut|date:"m/d/y" }}</td>
             <td >{{ rv.type }}</td>

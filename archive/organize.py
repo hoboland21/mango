@@ -113,4 +113,4 @@ def detail(request,rsvnid) :
 	result['location'] 	= 'entry'
 	result.update (csrf(request))
 	
-	return render_to_response('rsvn/entry.html',result )
+	return render('rsvn/entry.html',result )

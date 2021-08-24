@@ -5,98 +5,6 @@
 
 <style>
 
-.last {
-	background-color: pink;
-}
-.rsvd {
-	background-color: red;
-}
-
-.mine {
-	background-color: green;
-
-}
-
-.ooc {
-	background-color: black;
-	color : yellow;
-}
-
-.b2b {
-	background-color: orange;
-
-}
-
-.cell-wrapper {
-	width:20%;
-	padding:1em;
-
-}
-.cell-label {
-	font-size:9pt;
-
-}
-.cell-data {
-
-}
-.nice-input input {
-	width:100%;
-}
-.flex-con {
-
-	display:flex;
-	flex-wrap:wrap;
-	flex-direction:row;
-    padding:.25em;
-    align-items:align-center;
-}
-.big_cell {
-	border:1px solid green;
-	padding:1em;
-	margin:.5em;
-	border-radius:10px;
-}
-.blog-head {
-	font-size:9pt;
-	font-style: italic
-}
-.blog-msg {
-	font-size:12pt;
-	font-style:normal;
-
-}
-
-
-.RGDiv 
-{
-	padding:.1em;
-	border:1px solid brown;
-	background-color:inherit;
-	
-	}
-
-.last {
-	background-color: pink;
-}
-.rsvd {
-	background-color: red;
-}
-
-.mine {
-	background-color: green;
-
-}
-
-.ooc {
-	background-color: black;
-	color : yellow;
-}
-
-.b2b {
-	background-color: orange;
-
-}
-
 
 </style>
 
@@ -169,8 +77,12 @@
 	{% elif session.panel == 'gridcard' %}
 		{% include "inserts/newMainGrid.html" %}
 
+	{% elif session.panel == 'newgridcard' %}
+		{% include "inserts/gridDevelop.html" %}
+
 	{% elif session.panel == 'currentcard' %}
 		{% include "inserts/current.html" %}
+
 	{% elif session.panel == 'calendarcard' %}
 		{% include "inserts/calendar.html" %}
 
