@@ -1,1 +1,2 @@
-2021-08-25 09:54:44,532:django.request:Not Found: /favicon.ico
+2021-08-25 13:16:59,992:django.request:Not Found: /
+2021-08-25 13:17:00,659:django.request:Not Found: /favicon.ico
